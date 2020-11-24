@@ -21,7 +21,8 @@ class CreateVendorsTable extends Migration
             $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('status');
+            $table->boolean('visible')->default(true);
+            $table->boolean('open')->default(true);
             $table->timestamps();
         });
     }

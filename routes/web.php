@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CityController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VendorController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +24,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('cities', CityController::class);
+Route::resource('vendors',VendorController::class);
+Route::resource('categories',CategoryController::class);
