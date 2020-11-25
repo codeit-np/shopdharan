@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\SupplierInfoController;
 use App\Http\Controllers\SupplierProductController;
+use App\Http\Controllers\UserProductController;
+use App\Http\Controllers\UserVendorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Auth;
@@ -39,3 +41,11 @@ Route::group([
     Route::resource('products', SupplierProductController::class);
 });
 
+Route::group([
+    'prefix' => 'app'
+], function ($router) {
+    
+    Route::get('',[UserVendorController::class,'index']);
+    Route::get('{id}',[UserVendorController::class,'show']);
+    Route::get('product/{id}',[UserProductController::class,'show']);
+});

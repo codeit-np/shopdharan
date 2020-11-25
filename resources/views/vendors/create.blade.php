@@ -1,6 +1,15 @@
 @extends('admin.app')
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow">
@@ -38,8 +47,8 @@
                                 <div class="form-group">
                                     <label for="open">Open</label>
                                     <select name="open" class="form-control">
-                                            <option value='{{ true }}'>Open</option>
-                                            <option value="{{ false }}">Closed</option>
+                                            <option value=1>Open</option>
+                                            <option value=0>Closed</option>
                                     </select>
                                 </div>
                             </div>
