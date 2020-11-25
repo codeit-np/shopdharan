@@ -81,9 +81,8 @@ class SupplierProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $image = SavePhoto::ImageLink($product->image);
         $products = Product::all();
-        return view('supplier.product.edit',compact('products','product','image'));
+        return view('supplier.product.edit',compact('products','product'));
     }
 
     /**

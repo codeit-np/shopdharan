@@ -10,7 +10,7 @@
             <div class="card-header">
                  Edit Product
             </div>
-            <img src="{{ $image }}" 
+            <img src="{{ $product->image }}" 
                     class="rounded img-fluid img-thumbnail"
                 alt="{{ $product->name }}">
             <div class="card-body">

@@ -8,12 +8,12 @@ class SavePhoto {
         if($file){
             $filename = time() . '.' . $file->getClientOriginalName();
             $file->move('images',$filename);
-            return $filename;    
+            return '/'.'images/'.$filename;    
         }else{
             return null;
         }
     }
     public static function ImageLink($filename){
-        return asset('images/'.$filename);
+        return asset($filename);
     }
 }

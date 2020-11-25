@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\SavePhoto;
 use App\Models\Category;
 use App\Models\City;
-use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 
@@ -22,8 +21,7 @@ class SupplierInfoController extends Controller
         $vendor = $vendors[0];
         $cities = City::all();
         $categories = Category::all();
-        $image = SavePhoto::ImageLink($vendor->image);
-        return view('supplier.home',compact('vendor','image','cities','categories'));
+        return view('supplier.home',compact('vendor','cities','categories'));
     }
 
     /**

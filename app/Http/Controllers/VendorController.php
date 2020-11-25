@@ -73,11 +73,6 @@ class VendorController extends Controller
             $vendor->image = $filename;
         }
         $vendor->save();
-        // if($request->hasFile('image')){
-        //     $filename = SavePhoto::SaveImage($request->file('image'),'Vendor'.$vendor->id);
-        //     $vendor->image = $filename;
-        //     $vendor->update();
-        // }
         return redirect()->back();
     }
 
@@ -114,8 +109,7 @@ class VendorController extends Controller
             $newvendor->category = $category->category;
             array_push($vendors, $newvendor);
         }
-        $image = SavePhoto::ImageLink($vendor->image);
-        return view('vendors.edit',compact('cities','categories','vendors','vendor','image'));
+        return view('vendors.edit',compact('cities','categories','vendors','vendor'));
     }
 
     /**

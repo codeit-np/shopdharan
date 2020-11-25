@@ -7,7 +7,7 @@
                 <div class="card-header">
                     Edit Vendor
                 </div>
-                <img src="{{ $image }}" 
+                <img src="{{ $vendor->image }}" 
                     class="rounded img-fluid img-thumbnail"
                 alt="{{ $vendor->name }}">
                 <div class="card-body">
