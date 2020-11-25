@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\SupplierInfoController;
+use App\Http\Controllers\SupplierProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Auth;
@@ -27,3 +29,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('cities', CityController::class);
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
+
+Route::group([
+    'prefix' => 'supplier'
+], function ($router) {
+    
+    Route::get('',[SupplierInfoController::class,'index']);
+    Route::put('',[SupplierInfoController::class,'update']);
+    Route::resource('products', SupplierProductController::class);
+});
+

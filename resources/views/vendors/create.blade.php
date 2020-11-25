@@ -1,9 +1,6 @@
 @extends('admin.app')
 
 @section('content')
-@foreach ($errors->all() as $error)
-<li>{{ $error }}</li>
-@endforeach
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow">

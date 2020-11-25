@@ -18,10 +18,10 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('price');
             $table->string('discount')->nullable();
-            $table->string('selling_price');
+            $table->foreignId('vendor_id');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('status')->default(true);
+            $table->boolean('available')->default(true);
             $table->timestamps();
         });
     }
