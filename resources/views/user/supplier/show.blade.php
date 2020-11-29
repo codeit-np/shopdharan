@@ -1,7 +1,7 @@
 @extends('user.index')
 
 @section('content')
-    
+
 <div class="row">
   
     <div class="col-lg-3">
@@ -30,7 +30,7 @@
         @foreach ($products as $product)
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100 shadow">
-              <a href="/app/product/{{ $product->id }}"><img class="card-img-top" src={{ $product->image?$product->image:'/images/noimage.png' }} alt=""></a>
+              <a href="/app/product/{{ $product->id }}"><img class="card-img-top image-card" src={{ $product->image?$product->image:'/images/noimage.png' }} alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="/app/product/{{ $product->id }}">{{ $product->name }}</a>
@@ -41,7 +41,7 @@
                     @endif
                     Rs. {{ $product->price - $product->discount }}
                 </h5>
-                <p class="card-text">{{ $product->description }}</p>
+                <p class="card-text p-maxline">{{ $product->description }}</p>
               </div>
             </div>
           </div>

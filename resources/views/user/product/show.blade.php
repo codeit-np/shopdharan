@@ -16,8 +16,8 @@
 
     <div class="col-lg-9">
 
-      <div class="card mt-4 mb-4">
-        <img class="card-img-top img-fluid" src={{ $product->image?$product->image:'/images/noimage.png' }} alt="">
+      <div class="card mt-4">
+        <img class="card-img-top img-fluid image-card-big" src={{ $product->image?$product->image:'/images/noimage.png' }} alt="">
         <div class="card-body">
           <h3 class="card-title">{{ $product->name }}</h3>
           <h4>
@@ -29,8 +29,17 @@
           <p class="card-text">
             {{ $product->description }} 
            </p>
+        
+        <form method="post" action="/app/cart">
+          @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <div class="form-group p-3">
+            <label for="qty">Quantity</label>
+            <input name="qty" value="1" class="form-control " min="1" max="99" placeholder="Quantity" required type="number" min="0">
         </div>
-        <button type="button" class="btn btn-dark .btn-block">Add To Cart</button>
+        <button type="submit" class="btn btn-dark float-right mb-4 mr-4">Add To Cart</button>
+        </form>
+      </div>
       </div>
       <!-- /.card -->
 

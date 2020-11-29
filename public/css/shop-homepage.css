@@ -6,3 +6,18 @@
 body {
   padding-top: 100px;
 }
+
+.image-card{
+  height: 200px;
+  object-fit: cover;
+}
+
+.image-card-big{
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.p-maxline{
+  overflow: hidden;
+  max-height: 5ch;
+}

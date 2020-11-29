@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Customer;
+use App\Models\Product;
+use App\Models\UserCart;
+use Illuminate\Http\Request;
+
+class CartController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $customer = Customer::all()[0];
+        $cart_items = $customer->cart_items;
+        $cart_items->load('product');
+        $total = 0;
+        $quantity=0;
+        foreach($cart_items as $cart_item){
+            $price = $cart_item->product->price - $cart_item->product->discount;
+            $total += $cart_item->qty * $price;
+            $quantity += $cart_item->qty;
+        }
+        return view('user.cart.index',compact('cart_items','total','quantity'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'product_id'=>'required',
+            'qty'=>'integer|required|min:1|max:99'
+        ]);
+
+        $customer = Customer::all()[0];
+        $product = Product::find($request->product_id);
+        $vendor = $product->vendor;
+        $cart_item = new UserCart();
+        $cart_item->product_id = $product->id;
+        $cart_item->customer_id = $customer->id;
+        $cart_item->vendor_id = $vendor->id;
+        $cart_item->qty = $request->qty;
+        $cart_item->save();
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $customer = Customer::all()[0];
+        $cart_item = UserCart::find($id);
+        if($customer->id != $cart_item->customer_id){
+            return redirect()->back();
+        }
+        $cart_item->load('product');
+        return view('user.cart.edit', compact('cart_item'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'qty'=>'integer|required|min:1|max:99'
+        ]);
+        $customer = Customer::all()[0];
+        $cart_item = UserCart::find($id);
+        if($customer->id != $cart_item->customer_id){
+            return redirect()->back();
+        }
+        $cart_item->qty= $request->qty;
+        $cart_item->update();
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $customer = Customer::all()[0];
+        $cart_item = UserCart::find($id);
+        if($customer->id != $cart_item->customer_id){
+            return redirect()->back();
+        }
+        $cart_item->delete();
+        return redirect('app/cart');
+    }
+}

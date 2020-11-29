@@ -10,6 +10,8 @@
 
   <title>Shop Dharan - At Home Delivery On A Click Of A Button</title>
 
+  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
+ 
   <!-- Bootstrap core CSS -->
   <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -30,11 +32,11 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="/app">Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+            <a class="nav-link" href="/app/cart">Cart</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Orders</a>
@@ -43,7 +45,7 @@
             <a class="nav-link" href="#">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Info</a>
+            <a class="nav-link" href="/app/info">My Info</a>
           </li>
         </ul>
       </div>

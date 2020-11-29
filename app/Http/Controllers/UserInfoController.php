@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Vendor;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class UserVendorController extends Controller
+class UserInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   
-        $categories = Category::all();
-        if($request->has('category')){
-            $category = Category::find($request->category);
-            $vendors = $category->vendors;
-        }else{
-            $vendors = Vendor::all();
-        }
-        return view('user.supplier.index', compact('categories','vendors'));
+    public function index()
+    {
+        $customer = Customer::all()[0];
+        return view('user.info.index',compact('customer'));
     }
 
     /**
@@ -54,9 +47,7 @@ class UserVendorController extends Controller
      */
     public function show($id)
     {
-        $vendor = Vendor::find($id);
-        $products = $vendor->products;
-        return view('user.supplier.show', compact('vendor','products'));
+        //
     }
 
     /**
@@ -77,9 +68,19 @@ class UserVendorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required',
+            'email'=>'required|email',
+            'mobile'=>'required|numeric'
+        ]);
+        $customer = Customer::all()[0];
+        $customer->name = $request->name;
+        $customer->email= $request->email;
+        $customer->mobile = $request->mobile;
+        $customer->update();
+        return redirect()->back();    
     }
 
     /**

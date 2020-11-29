@@ -101,10 +101,10 @@ class VendorController extends Controller
         // $vendors = Vendor::all();
         $vendorlist = Vendor::all();
         $vendors = array();
-        foreach($vendorlist as $vendor){
-            $newvendor = $vendor;
-            $city = $vendor->city;
-            $category = $vendor->category;
+        foreach($vendorlist as $currentvendor){
+            $newvendor = $currentvendor;
+            $city = $currentvendor->city;
+            $category = $currentvendor->category;
             $newvendor->city = $city->city;
             $newvendor->category = $category->category;
             array_push($vendors, $newvendor);

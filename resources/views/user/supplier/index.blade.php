@@ -11,8 +11,9 @@
         {{-- <a href="#" class="list-group-item">Category 1</a>
         <a href="#" class="list-group-item">Category 2</a>
         <a href="#" class="list-group-item">Category 3</a> --}}
+        <a href="/app" class="list-group-item">All</a>
         @foreach ($categories as $category)
-        <a href="#" class="list-group-item">{{ $category->category }}</a>
+        <a href="/app?category={{ $category->id }}" class="list-group-item">{{ $category->category }}</a>
         @endforeach
       </div>
       
@@ -39,12 +40,12 @@
         @foreach ($vendors as $vendor)
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-100 shadow">
-            <a href="/app/{{ $vendor->id }}"><img class="card-img-top .img-fluid" src="{{ $vendor->image?$vendor->image:'/images/noimage.png' }}" alt=""></a>
+            <a href="/app/supplier/{{ $vendor->id }}"><img class="card-img-top .img-fluid image-card" src="{{ $vendor->image?$vendor->image:'/images/noimage.png' }}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="/app/{{ $vendor->id }}">{{ $vendor->name }}</a>
+                <a href="/app/supplier/{{ $vendor->id }}">{{ $vendor->name }}</a>
               </h4>
-              <p class="card-text">{{ $vendor->open?"Open":"Closed At The Moment" }}</p>
+              <p class="card-text p-maxline">{{ $vendor->open?"Open":"Closed At The Moment" }}</p>
             </div>
           </div>
         </div>    

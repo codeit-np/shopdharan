@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ClearCart;
 use App\Http\Controllers\SupplierInfoController;
 use App\Http\Controllers\SupplierProductController;
+use App\Http\Controllers\UserAddressController;
+use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\UserVendorController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +50,11 @@ Route::group([
 ], function ($router) {
     
     Route::get('',[UserVendorController::class,'index']);
-    Route::get('{id}',[UserVendorController::class,'show']);
     Route::get('product/{id}',[UserProductController::class,'show']);
+    Route::resource('cart',CartController::class);
+    Route::get('info', [UserInfoController::class,'index']);
+    Route::put('info', [UserInfoController::class,'update']);
+    Route::delete('clearcart', ClearCart::class);
+    Route::get('supplier/{id}',[UserVendorController::class,'show']);
+    Route::resource('address', UserAddressController::class);
 });
