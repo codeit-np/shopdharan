@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CartData;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\UserCart;
@@ -17,16 +18,22 @@ class CartController extends Controller
     public function index()
     {
         $customer = Customer::all()[0];
-        $cart_items = $customer->cart_items;
-        $cart_items->load('product');
-        $total = 0;
-        $quantity=0;
-        foreach($cart_items as $cart_item){
-            $price = $cart_item->product->price - $cart_item->product->discount;
-            $total += $cart_item->qty * $price;
-            $quantity += $cart_item->qty;
-        }
-        return view('user.cart.index',compact('cart_items','total','quantity'));
+        // $cart_items = $customer->cart_items;
+        // $cart_items->load('product');
+        // $total = 0;
+        // $quantity = 0;
+        // $addresses = $customer->addresses;
+        // $addresses->load('city');
+        // foreach ($cart_items as $cart_item) {
+        //     $price = $cart_item->product->price - $cart_item->product->discount;
+        //     $total += $cart_item->qty * $price;
+        //     $quantity += $cart_item->qty;
+        // }
+        $data = CartData::getCartData($customer);
+        $cart_items = $data['cart_items'];
+        $total = $data['total'];
+        $quantity = $data['quantity'];
+        return view('user.cart.index', compact('cart_items', 'total', 'quantity'));
     }
 
     /**
@@ -48,8 +55,8 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id'=>'required',
-            'qty'=>'integer|required|min:1|max:99'
+            'product_id' => 'required',
+            'qty' => 'integer|required|min:1|max:99'
         ]);
 
         $customer = Customer::all()[0];
@@ -85,7 +92,7 @@ class CartController extends Controller
     {
         $customer = Customer::all()[0];
         $cart_item = UserCart::find($id);
-        if($customer->id != $cart_item->customer_id){
+        if ($customer->id != $cart_item->customer_id) {
             return redirect()->back();
         }
         $cart_item->load('product');
@@ -102,14 +109,14 @@ class CartController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'qty'=>'integer|required|min:1|max:99'
+            'qty' => 'integer|required|min:1|max:99'
         ]);
         $customer = Customer::all()[0];
         $cart_item = UserCart::find($id);
-        if($customer->id != $cart_item->customer_id){
+        if ($customer->id != $cart_item->customer_id) {
             return redirect()->back();
         }
-        $cart_item->qty= $request->qty;
+        $cart_item->qty = $request->qty;
         $cart_item->update();
         return redirect()->back();
     }
@@ -124,10 +131,23 @@ class CartController extends Controller
     {
         $customer = Customer::all()[0];
         $cart_item = UserCart::find($id);
-        if($customer->id != $cart_item->customer_id){
+        if ($customer->id != $cart_item->customer_id) {
             return redirect()->back();
         }
         $cart_item->delete();
         return redirect('app/cart');
     }
+    public function confirm()
+    {
+        $customer = Customer::all()[0];
+        $delivery = intval(env('DELIVERY_CHARGE', 50));
+        $addresses = $customer->addresses;
+        $addresses->load('city');
+        // $data = $this->getCartData();
+        $data = CartData::getCartData($customer);
+        $quantity = $data['quantity'];
+        $total = $data['total'];
+        return view('user.cart.confirm', compact('addresses', 'delivery','quantity','total','customer'));
+    }
+
 }

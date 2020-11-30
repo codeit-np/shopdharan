@@ -8,6 +8,7 @@ use App\Http\Controllers\SupplierInfoController;
 use App\Http\Controllers\SupplierProductController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\UserInfoController;
+use App\Http\Controllers\UserOrderController;
 use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\UserVendorController;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +52,9 @@ Route::group([
     
     Route::get('',[UserVendorController::class,'index']);
     Route::get('product/{id}',[UserProductController::class,'show']);
+    Route::get('cart/confirm', [CartController::class,'confirm']);
     Route::resource('cart',CartController::class);
+    Route::resource('order', UserOrderController::class);
     Route::get('info', [UserInfoController::class,'index']);
     Route::put('info', [UserInfoController::class,'update']);
     Route::delete('clearcart', ClearCart::class);

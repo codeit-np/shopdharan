@@ -15,8 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->timestamp('ordered_time')->useCurrent();
             $table->foreignId('customer_id');
+            $table->foreignId('address_id');
             $table->string('total');
             $table->string('charge');
             $table->string('net_total');

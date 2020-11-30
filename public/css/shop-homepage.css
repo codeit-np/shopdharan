@@ -12,6 +12,11 @@ body {
   object-fit: cover;
 }
 
+.image-card-small{
+  height: 150px;
+  object-fit: cover;
+}
+
 .image-card-big{
   max-height: 500px;
   object-fit: cover;

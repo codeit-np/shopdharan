@@ -20,7 +20,7 @@
     </div>
     <!-- /.col-lg-3 -->
     
-    <div class="col-lg-9">
+    <div class="col-md-9">
       
       <div class="row">
         
@@ -38,14 +38,14 @@
         </div> --}}
         
         @foreach ($vendors as $vendor)
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-3 col-md-4 mb-4">
           <div class="card h-100 shadow">
-            <a href="/app/supplier/{{ $vendor->id }}"><img class="card-img-top .img-fluid image-card" src="{{ $vendor->image?$vendor->image:'/images/noimage.png' }}" alt=""></a>
+            <a href="/app/supplier/{{ $vendor->id }}"><img class="card-img-top .img-fluid image-card-small" src="{{ $vendor->image?$vendor->image:'/images/noimage.png' }}" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="/app/supplier/{{ $vendor->id }}">{{ $vendor->name }}</a>
               </h4>
-              <p class="card-text p-maxline">{{ $vendor->open?"Open":"Closed At The Moment" }}</p>
+              {{ $vendor->city->city }}
             </div>
           </div>
         </div>    

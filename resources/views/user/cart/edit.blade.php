@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-lg-6 col-md-8">
         <div class="card shadow">
             <img class="card-img-top img-fluid image-card-big" src={{ $cart_item->product->image?$cart_item->product->image:'/images/noimage.png' }} alt="">
             <div class="card-body">

@@ -22,6 +22,7 @@ class UserVendorController extends Controller
         }else{
             $vendors = Vendor::all();
         }
+        $vendors->load('city');
         return view('user.supplier.index', compact('categories','vendors'));
     }
 
