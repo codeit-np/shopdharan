@@ -6,12 +6,16 @@
         <div class="col-md-3">
             {{-- <h1 class="my-4">Links</h1> --}}
             <div class="list-group">
-                <a href="/app/cart" class="list-group-item">
-                    Cart
+                <a href="/app/order" class="list-group-item">
+                    All
                 </a>
-                <a href="/app/orders" class="list-group-item">
-                    See Orders
+                @foreach ($order_statuses as $id=>$status)
+                <a href="/app/order?status={{ $status }}" class="list-group-item" 
+                    title="{{ $status }}"
+                >
+                    {{ $status }}
                 </a>
+                @endforeach
             </div>
         </div>
         {{-- End Links --}}
@@ -21,14 +25,14 @@
                     Orders
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-sm">
+                    <table class="table ">
                         <tr>
                             <th>#</th>
                             <th>Status</th>
                             <th>Cost</th>
                             <th>Delivery</th>
                             <th>Total</th>
-                            <th>Ordered Time</th>
+                            <th>Time</th>
                             <th>Action</th>
                         </tr>
                         @foreach ($orders as $index => $order)
@@ -48,6 +52,7 @@
                             </tr>
                         @endforeach
                     </table>
+                    {{ $orders->render('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

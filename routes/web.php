@@ -55,6 +55,7 @@ Route::group([
     Route::get('cart/confirm', [CartController::class,'confirm']);
     Route::resource('cart',CartController::class);
     Route::resource('order', UserOrderController::class);
+    Route::post('order/{id}/cancel',[UserOrderController::class,'cancel']);
     Route::get('info', [UserInfoController::class,'index']);
     Route::put('info', [UserInfoController::class,'update']);
     Route::delete('clearcart', ClearCart::class);

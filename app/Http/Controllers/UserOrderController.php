@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CartData;
+use App\Helpers\OrderStatus;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -17,13 +18,14 @@ class UserOrderController extends Controller
      */
     public function index(Request $request)
     {
+        $order_statuses = OrderStatus::get();
         $customer = Customer::all()->first();
         $orders_query = $customer->orders();
         if($request->has('status')){
             $orders_query->where('status',$request->status);
         }
-        $orders = $orders_query->get()->sortByDesc('ordered_time');
-        return view('user.order.index',compact('orders'));
+        $orders = $orders_query->orderBy('ordered_time','desc')->paginate(15);
+        return view('user.order.index',compact('orders','order_statuses'));
     }
     
     /**
@@ -120,5 +122,20 @@ class UserOrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cancel($id){
+        $order_statuses = OrderStatus::get();
+        $customer = Customer::all()->first();
+        $order = Order::find($id);
+        if($customer->id != $order->customer_id){
+            return redirect()->back();
+        }
+        if($order->status != $order_statuses['Pending']){
+            return redirect()->back();
+        }
+        $order->status = $order_statuses['Cancelled'];
+        $order->update();
+        return redirect()->back();
     }
 }

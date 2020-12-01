@@ -37,7 +37,17 @@
                             <td>Status</td>
                             <td>{{ $order->status }}</td>
                         </tr>
+                        
                     </table>
+                    <form action="/app/order/{{ $order->id }}/cancel"
+                        onsubmit="return confirm('Are You Sure You Want To Cancel?')"   
+                        method="POST"
+                    >
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm float-right">
+                            Cancel Order
+                        </button> 
+                    </form>
                 </div>
 
             </div>
