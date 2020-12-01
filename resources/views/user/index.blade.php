@@ -39,7 +39,7 @@
             <a class="nav-link" href="/app/cart">Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Orders</a>
+            <a class="nav-link" href="/app/order">Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About Us</a>

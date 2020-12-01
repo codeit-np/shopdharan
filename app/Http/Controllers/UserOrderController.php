@@ -15,9 +15,15 @@ class UserOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $customer = Customer::all()->first();
+        $orders_query = $customer->orders();
+        if($request->has('status')){
+            $orders_query->where('status',$request->status);
+        }
+        $orders = $orders_query->get();
+        return view('user.order.index',compact('orders'));
     }
     
     /**
@@ -73,7 +79,13 @@ class UserOrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::all()->first();
+        $order = Order::find($id);
+        if($customer->id != $order->customer_id){
+            return redirect()->back();
+        }
+        $order->load(['address','items', 'items.product']);
+        return view('user.order.show',compact('order'));
     }
     
     /**
