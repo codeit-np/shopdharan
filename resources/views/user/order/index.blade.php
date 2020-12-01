@@ -24,10 +24,10 @@
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th>#</th>
+                            <th>Status</th>
                             <th>Cost</th>
                             <th>Delivery</th>
                             <th>Total</th>
-                            <th>Status</th>
                             <th>Ordered Time</th>
                             <th>Action</th>
                         </tr>
@@ -41,8 +41,8 @@
                                 <td>{{ $order->net_total }}</td>
                                 <td>{{ $order->ordered_time }}</td>
                                 <td>
-                                    <a href="/app/order/{{ $order->id }}" class="btn btn-primary btn-sm">
-                                        View
+                                    <a href="/app/order/{{ $order->id }}" title="View Order" >
+                                        <i class="nav-icon fas fa-eye "></i>
                                     </a>
                                 </td>
                             </tr>

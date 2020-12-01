@@ -22,7 +22,7 @@ class UserOrderController extends Controller
         if($request->has('status')){
             $orders_query->where('status',$request->status);
         }
-        $orders = $orders_query->get();
+        $orders = $orders_query->get()->sortByDesc('ordered_time');
         return view('user.order.index',compact('orders'));
     }
     
