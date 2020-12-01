@@ -65,7 +65,9 @@
                                     value="{{ $vendor->city_id }}"
                                     class="form-control">
                                         @foreach ($cities as $city)
-                                            <option value="{{ $city->id }}">{{ $city->city }}</option>
+                                            <option value="{{ $city->id }}"
+                                                {{ $vendor->city_id == $city->id ? 'selected' : '' }}    
+                                            >{{ $city->city }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -78,7 +80,9 @@
                                     value="{{ $vendor->category_id }}"
                                     class="form-control">
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                            <option value="{{ $category->id }}"
+                                                {{ $vendor->category_id == $category->id ? 'selected' : '' }}     
+                                            >{{ $category->category }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -49,7 +49,7 @@ class UserOrderController extends Controller
         $delivery_charge = intval(env('DELIVERY_CHARGE', 50));
         $request->validate([
             'address_id' => 'required'
-            ]);
+        ]);
             $customer = Customer::all()->first();
             $data = CartData::getCartData($customer);
             $order = new Order();
@@ -58,8 +58,11 @@ class UserOrderController extends Controller
             $order->charge = $delivery_charge;
             $order->total = $data['total'];
             $order->net_total = $delivery_charge + $data['total'];
-            $order->save();
             $cart_items = $data['cart_items'];
+            if(count($cart_items)==0){
+                return redirect()->back()->with('failed', 'No Item In Cart To Add'); 
+            }
+            $order->save();
             $order_items = array();
             foreach($cart_items as $cart_item){
                 $order_item = new OrderDetail();
@@ -70,7 +73,8 @@ class UserOrderController extends Controller
                 array_push($order_items,$order_item);
             }
         $order->items()->saveMany($order_items);
-        return redirect()->back();    
+        $cart_items->each->delete();
+        return redirect('/app/order/'.$order->id);    
     }
     
     /**

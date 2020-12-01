@@ -1,12 +1,7 @@
-@extends('user.index')
+@extends('admin.app')
 
 @section('content')
 
-    @if (session('failed'))
-        <div class="alert  alert-danger">
-            {{ session('failed') }}
-        </div>
-    @endif
     <div class="row">
 
         {{-- Order Table --}}
@@ -16,7 +11,15 @@
                     Order Details
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-sm">
+                    <table class="table  table-sm">
+                        <tr>
+                            <td>Customer Name</td>
+                            <td>{{ $order->customer->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td>{{ $order->customer->mobile }}</td>
+                        </tr>
                         <tr>
                             <td>Ordered Time</td>
                             <td>{{ $order->ordered_time }}</td>
@@ -35,21 +38,24 @@
                             <td>{{ $order->charge }}</td>
                         </tr>
                         <tr>
-                            <td>Total</td>
-                            <td>{{ $order->net_total }}</td>
+                            <th>Total</th>
+                            <th>{{ $order->net_total }}</th>
                         </tr>
-                        <tr>
-                            <td>Status</td>
-                            <td>{{ $order->status }}</td>
-                        </tr>
-
                     </table>
-                    <form action="/app/order/{{ $order->id }}/cancel"
-                        onsubmit="return confirm('Are You Sure You Want To Cancel?')" method="POST">
+                    <form action="/orders/{{ $order->id }}" method="post">
                         @csrf
-                        <button type="submit" class="btn btn-danger btn-sm float-right">
-                            Cancel Order
-                        </button>
+                        @method('put')
+                        <div class="form-group mt-3">
+                            <label for="status">Status</label>
+                            <select name="status" value="{{ $order->status }}" class="form-control">
+                                @foreach ($order_statuses as $index => $status)
+                                    <option value="{{ $status }}" {{ $order->status == $status ? 'selected' : '' }}>
+                                        {{ $status }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-primary float-right mt-4">Update Status</button>
+                        </div>
                     </form>
                 </div>
 
@@ -85,8 +91,8 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <th>Total</th>
-                            <th>Rs.{{ $order->total }}</th>
+                            <td>Total</td>
+                            <td>Rs.{{ $order->total }}</td>
                         </tr>
                     </table>
                 </div>

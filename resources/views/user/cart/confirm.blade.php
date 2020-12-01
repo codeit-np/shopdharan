@@ -1,6 +1,11 @@
 @extends('user.index')
 
 @section('content')
+@if (session('failed'))
+<div class="alert  alert-danger">
+    {{ session('failed') }}
+</div>
+@endif
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-9">
             <div class="card shadow">
