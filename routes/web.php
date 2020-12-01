@@ -14,6 +14,7 @@ use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\UserVendorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\VendorOrderController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -46,6 +47,7 @@ Route::group([
     Route::get('',[SupplierInfoController::class,'index']);
     Route::put('',[SupplierInfoController::class,'update']);
     Route::resource('products', SupplierProductController::class);
+    Route::resource('orders',VendorOrderController::class);
 });
 
 Route::group([
