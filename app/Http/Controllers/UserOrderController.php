@@ -24,7 +24,7 @@ class UserOrderController extends Controller
         if($request->has('status')){
             $orders_query->where('status',$request->status);
         }
-        $orders = $orders_query->orderBy('ordered_time','desc')->paginate(15);
+        $orders = $orders_query->orderBy('ordered_time','desc')->paginate(10);
         return view('user.order.index',compact('orders','order_statuses'));
     }
     
@@ -132,7 +132,7 @@ class UserOrderController extends Controller
             return redirect()->back();
         }
         if($order->status != $order_statuses['Pending']){
-            return redirect()->back();
+            return redirect()->back()->with('failed','Your Order Status is '.$order->status.' It Cannot Be Cancelled');
         }
         $order->status = $order_statuses['Cancelled'];
         $order->update();
