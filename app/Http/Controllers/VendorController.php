@@ -29,20 +29,21 @@ class VendorController extends Controller
     {
         $cities = City::all();
         $categories = Category::all();
-        // $vendors = Vendor::all();
-        $vendorlist = Vendor::all();
-        $vendors = array();
-        foreach($vendorlist as $vendor){
-            $newvendor = $vendor;
-            $city = $vendor->city;
-            $category = $vendor->category;
-            $newvendor->city = $city->city;
-            $newvendor->category = $category->category;
-            array_push($vendors, $newvendor);
-        }
+        $vendors = Vendor::all();
+        $vendors->load(['city','category']);
+        // $vendorlist = Vendor::all();
+        // $vendors = array();
+        // foreach($vendorlist as $vendor){
+        //     $newvendor = $vendor;
+        //     $city = $vendor->city;
+        //     $category = $vendor->category;
+        //     $newvendor->city = $city->city;
+        //     $newvendor->category = $category->category;
+        //     array_push($vendors, $newvendor);
+        // }
         return view('vendors.create',compact('categories','cities','vendors'));
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      *
@@ -98,17 +99,18 @@ class VendorController extends Controller
         $vendor = Vendor::find($id);
         $cities = City::all();
         $categories = Category::all();
-        // $vendors = Vendor::all();
-        $vendorlist = Vendor::all();
-        $vendors = array();
-        foreach($vendorlist as $currentvendor){
-            $newvendor = $currentvendor;
-            $city = $currentvendor->city;
-            $category = $currentvendor->category;
-            $newvendor->city = $city->city;
-            $newvendor->category = $category->category;
-            array_push($vendors, $newvendor);
-        }
+        $vendors = Vendor::all();
+        $vendors->load(['city','category']);
+        // $vendorlist = Vendor::all();
+        // $vendors = array();
+        // foreach($vendorlist as $currentvendor){
+        //     $newvendor = $currentvendor;
+        //     $city = $currentvendor->city;
+        //     $category = $currentvendor->category;
+        //     $newvendor->city = $city->city;
+        //     $newvendor->category = $category->category;
+        //     array_push($vendors, $newvendor);
+        // }
         return view('vendors.edit',compact('cities','categories','vendors','vendor'));
     }
 

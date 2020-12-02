@@ -122,8 +122,8 @@
                          <tr>
                              <td>{{ $index+1 }}</td>
                              <td>{{ $vendor->name }}</td>
-                             <td>{{ $vendor->city }}</td>
-                             <td>{{ $vendor->category }}</td>
+                             <td>{{ $vendor->city->city }}</td>
+                             <td>{{ $vendor->category->category }}</td>
                              <td>{{ $vendor->visible?"Visible":"Not Visible" }}</td>
                              <td>{{ $vendor->open?"Open":"Closed" }}</td>
                              <td><a href="/vendors/{{ $vendor->id }}/edit" class="btn btn-primary btn-sm">Edit</a></td>
