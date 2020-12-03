@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClearCart;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierInfoController;
 use App\Http\Controllers\SupplierProductController;
@@ -39,7 +40,7 @@ Route::resource('cities', CityController::class);
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
 Route::resource('orders',OrderController::class);
-
+Route::resource('employees', EmployeeController::class);
 Route::group([
     'prefix' => 'supplier'
 ], function ($router) {

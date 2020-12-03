@@ -180,6 +180,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
+            <a href="/employees/create" class="nav-link">
+              <i class="nav-icon fas fa-store"></i>
+              <p>
+               Add Employee
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="/vendors/create" class="nav-link">
               <i class="nav-icon fas fa-store"></i>
               <p>
