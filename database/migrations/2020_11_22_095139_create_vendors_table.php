@@ -23,6 +23,9 @@ class CreateVendorsTable extends Migration
             $table->string('password');
             $table->boolean('visible')->default(true);
             $table->boolean('open')->default(true);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }

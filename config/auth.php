@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Customer;
+use App\Models\Vendor;
+
 return [
 
     /*
@@ -70,6 +73,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'vendor'=>[
+            'driver'=>'eloquent',
+            'model'=>Vendor::class,
+        ],
+        'customer'=>[
+            'driver'=>'eloquent',
+            'model'=>Customer::class
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
