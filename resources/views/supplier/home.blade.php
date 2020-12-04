@@ -9,7 +9,7 @@
                 <div class="card-header">
                     About Me
                 </div>
-                <img src="{{ $vendor->image }}" class="rounded img-fluid img-thumbnail"
+                <img src="{{ $vendor->image?$vendor->image:'/images/noimage.png' }}" class="rounded img-fluid img-thumbnail"
                 alt="{{ $vendor->name }}">
                 <div class="card-body">
                     <form action="/supplier" method="post" enctype="multipart/form-data">

@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class SupplierProductController extends Controller
 {
+    public function __construct()
+    {
+        auth()->setDefaultDriver('webvendor');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +29,9 @@ class SupplierProductController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $supplier = auth()->user();
+        $products= $supplier->products;
         return view('supplier.product.create', compact('products'));
     }
 
@@ -43,8 +49,8 @@ class SupplierProductController extends Controller
             'discount'=>'required|min:0',
             'available'=>'required',
         ]);
-        $suppliers = Vendor::all();
-        $supplier = $suppliers[0];
+       
+        $supplier = auth()->user();
         $product = new Product();
         $product->vendor_id= $supplier->id;
         $product->name = $request->name;
@@ -79,9 +85,13 @@ class SupplierProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        $vendor = auth()->user();
         $product = Product::find($id);
-        $products = Product::all();
+        if($product->vendor_id != $vendor->id){
+            return redirect()->back()->with('fail', "You're not allowed To View That");
+        }
+        $products = $vendor->products;
         return view('supplier.product.edit',compact('products','product'));
     }
 
@@ -101,6 +111,10 @@ class SupplierProductController extends Controller
             'available'=>'required',
         ]);
         $product = Product::find($id);
+        $vendor = auth()->user();
+        if($product->vendor_id!= $vendor->id){
+            return redirect()->back()->with('fail', "You're Not Allowed To Do That");
+        }
         $product->name = $request->name;
         $product->price = $request->price;
         $product->discount = $request->discount;
@@ -122,7 +136,12 @@ class SupplierProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::destroy($id);
+        $product = Product::find($id);
+        $vendor = auth()->user();
+        if($product->vendor_id!= $vendor->id){
+            return redirect()->back()->with('fail', "You're Not Allowed To Do That");
+        }
+        $product->delete();
         return redirect('/supplier/products/create');
     }
 }

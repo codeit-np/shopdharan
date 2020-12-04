@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class SupplierInfoController extends Controller
 {
+    public function __construct()
+    {
+        auth()->setDefaultDriver('webvendor');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +21,7 @@ class SupplierInfoController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::all();
-        $vendor = $vendors[0];
+        $vendor = auth()->user();
         $cities = City::all();
         $categories = Category::all();
         return view('supplier.home',compact('vendor','cities','categories'));

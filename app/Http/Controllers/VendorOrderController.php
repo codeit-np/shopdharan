@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class VendorOrderController extends Controller
 {
+    public function __construct()
+    {
+        auth()->setDefaultDriver('webvendor');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class VendorOrderController extends Controller
     public function index(Request $request)
     {   
         $order_statuses = OrderStatus::get();
-        $vendor = Vendor::all()->first();
+        $vendor = auth()->user();
         $order_query = $vendor->orders();
         if($request->has('status')){
             $order_query->whereHas('order', function($q) use($request) {

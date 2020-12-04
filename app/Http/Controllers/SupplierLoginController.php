@@ -24,8 +24,8 @@ class SupplierLoginController extends Controller
         ]);
         
         $credentials = $request->only(['email','password']);
-        $remember = $request->has('remember')?true:false;
-        if(auth()->attempt($credentials,$remember)){
+        // $remember = $request->has('remember')?true:false;
+        if(auth()->attempt($credentials)){
             return redirect('/supplier');
         }
         return redirect()->back()->with('fail','Invalid Credentials');
