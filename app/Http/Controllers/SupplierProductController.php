@@ -11,6 +11,7 @@ class SupplierProductController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth:webvendor');
         auth()->setDefaultDriver('webvendor');
     }
     /**

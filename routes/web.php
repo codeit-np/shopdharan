@@ -51,8 +51,9 @@ Route::group([
     Route::put('',[SupplierInfoController::class,'update']);
     Route::resource('products', SupplierProductController::class);
     Route::resource('orders',VendorOrderController::class);
-    Route::get('login',[SupplierLoginController::class,'show']);
+    Route::get('login',[SupplierLoginController::class,'show'])->name('supplierlogin');
     Route::post('login',[SupplierLoginController::class,'process'])->name('supplierlogin');
+    Route::delete('logout',[SupplierLoginController::class, 'logout']);
 });
 
 Route::group([

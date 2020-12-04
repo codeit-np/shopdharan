@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 class SupplierInfoController extends Controller
 {
     public function __construct()
-    {
+    { 
+        $this->middleware('auth:webvendor');
         auth()->setDefaultDriver('webvendor');
     }
     /**
@@ -86,8 +87,7 @@ class SupplierInfoController extends Controller
             'email'=>'required|email',
             'open'=>'required'
         ]);
-        $vendors = Vendor::all();
-        $vendor = $vendors[0];
+        $vendor = auth()->user();
         $vendor->name = $request->name;
         $vendor->city_id = $request->city_id;    
         $vendor->category_id = $request->category_id;

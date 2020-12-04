@@ -34,6 +34,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      @if (auth()->check())
+
+      <li class="nav-item d-none d-sm-inline-block">
+        <form action="/supplier/logout" method="post" onsubmit="return confirm('Are You Sure You Wan to Logout?')">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-danger float-right">Logout</button>
+        </form>
+      </li>
+      @endif
     </ul>
 
     <!-- SEARCH FORM -->

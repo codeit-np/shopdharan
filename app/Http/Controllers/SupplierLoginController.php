@@ -30,4 +30,9 @@ class SupplierLoginController extends Controller
         }
         return redirect()->back()->with('fail','Invalid Credentials');
     }
+
+    public function logout(){
+        auth()->logout();
+        return redirect('/');
+    }
 }
