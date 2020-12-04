@@ -43,7 +43,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        'webvendor'=>[
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ],
+        'webcustomer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -73,11 +80,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'vendor'=>[
+        'vendors'=>[
             'driver'=>'eloquent',
             'model'=>Vendor::class,
         ],
-        'customer'=>[
+        'customers'=>[
             'driver'=>'eloquent',
             'model'=>Customer::class
         ]

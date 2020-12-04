@@ -7,6 +7,7 @@ use App\Http\Controllers\ClearCart;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierInfoController;
+use App\Http\Controllers\SupplierLoginController;
 use App\Http\Controllers\SupplierProductController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\UserInfoController;
@@ -41,6 +42,7 @@ Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
 Route::resource('orders',OrderController::class);
 Route::resource('employees', EmployeeController::class);
+
 Route::group([
     'prefix' => 'supplier'
 ], function ($router) {
@@ -49,6 +51,8 @@ Route::group([
     Route::put('',[SupplierInfoController::class,'update']);
     Route::resource('products', SupplierProductController::class);
     Route::resource('orders',VendorOrderController::class);
+    Route::get('login',[SupplierLoginController::class,'show']);
+    Route::post('login',[SupplierLoginController::class,'process'])->name('supplierlogin');
 });
 
 Route::group([

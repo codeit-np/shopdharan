@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class VendorController extends Controller
 {
@@ -66,7 +67,7 @@ class VendorController extends Controller
         $vendor->city_id = $request->city_id;    
         $vendor->category_id = $request->category_id;
         $vendor->email = $request->email;
-        $vendor->password = $request->password;
+        $vendor->password = Hash::make($request->password);
         $vendor->visible = $request->visible;
         $vendor->open = $request->open;
         if($request->hasFile('image')){
