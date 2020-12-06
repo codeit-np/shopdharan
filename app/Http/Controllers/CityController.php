@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +43,10 @@ class CityController extends Controller
         $request->validate([
             'city' => 'required'
         ]);
+        $employee = auth()->user();
+        if(!$employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         $city = new City();
         $city->city = $request->city;
         $city->save();
@@ -81,6 +89,10 @@ class CityController extends Controller
         $request->validate([
             'city' => 'required'
         ]);
+        $employee = auth()->user();
+        if(!$employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         $city = City::find($id);
         $city->city = $request->city;
         $city->update();
@@ -95,6 +107,10 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
+        $employee = auth()->user();
+        if(!$employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         City::destroy($id);
         return redirect('/cities/create');
     }

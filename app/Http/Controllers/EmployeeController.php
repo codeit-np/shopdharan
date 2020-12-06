@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +45,10 @@ class EmployeeController extends Controller
             'password' => 'required',
             'is_admin' => 'required'
         ]);
-
+        $user_employee = auth()->user();
+        if(!$user_employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         $employee = new User();
         $employee->name = $request->name;
         $employee->email = $request->email;
@@ -70,6 +77,10 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        $user_employee = auth()->user();
+        if(!$user_employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         $employee = User::find($id);
         if(! $employee){
             return redirect('/employees/create');
@@ -92,7 +103,10 @@ class EmployeeController extends Controller
             'email' => 'required|email',
             'is_admin' => 'required'
         ]);
-
+        $user_employee = auth()->user();
+        if(!$user_employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         $employee = User::find($id);
         $employee->name = $request->name;
         $employee->email = $request->email;
@@ -109,6 +123,10 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+        $user_employee = auth()->user();
+        if(!$user_employee->is_admin){
+            return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
+        }
         $employee = User::find($id);
         $employee->delete();
         return redirect('/employees/create')->with('success', 'Employee Deleted Successfully');
