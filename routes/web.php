@@ -7,6 +7,7 @@ use App\Http\Controllers\ClearCart;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeLoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierInfoController;
 use App\Http\Controllers\SupplierLoginController;
@@ -44,12 +45,13 @@ Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
 Route::resource('orders',OrderController::class);
 Route::resource('employees', EmployeeController::class);
+Route::delete('logout',[EmployeeLoginController::class,'logout']);
 
 Route::group([
     'prefix' => 'supplier'
 ], function ($router) {
     
-    Route::get('',[SupplierInfoController::class,'index']);
+    Route::get('',[SupplierInfoController::class,'index'])->name('supplier.home');
     Route::put('',[SupplierInfoController::class,'update']);
     Route::resource('products', SupplierProductController::class);
     Route::resource('orders',VendorOrderController::class);
@@ -62,7 +64,7 @@ Route::group([
     'prefix' => 'app'
 ], function ($router) {
     
-    Route::get('',[UserVendorController::class,'index']);
+    Route::get('',[UserVendorController::class,'index'])->name('customer.home');
     Route::get('product/{id}',[UserProductController::class,'show']);
     Route::get('cart/confirm', [CartController::class,'confirm']);
     Route::resource('cart',CartController::class);

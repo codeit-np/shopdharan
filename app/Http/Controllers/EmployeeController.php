@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -52,7 +53,7 @@ class EmployeeController extends Controller
         $employee = new User();
         $employee->name = $request->name;
         $employee->email = $request->email;
-        $employee->password = $request->password;
+        $employee->password = Hash::make($request->password);
         $employee->is_admin = $request->is_admin;
         $employee->save();
         return redirect()->back()->with('success', 'Employee Added Successfully');
