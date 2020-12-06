@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class UserAddressController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:webcustomer');
+        auth()->setDefaultDriver('webcustomer');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +50,7 @@ class UserAddressController extends Controller
             'city_id'=>'required',
             'street'=>'required'
         ]);
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $address = new Address();
         $address->city_id = $request->city_id;
         $address->street = $request->street;
@@ -75,7 +80,7 @@ class UserAddressController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $address = Address::find($id);
         if($address->customer_id != $customer->id){
             return redirect()->back();
@@ -99,7 +104,7 @@ class UserAddressController extends Controller
             'city_id'=>'required',
             'street'=>'required'
         ]);
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $address = Address::find($id);
         if($address->customer_id == $customer->id){
             $address->city_id = $request->city_id;
@@ -120,7 +125,7 @@ class UserAddressController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $address = Address::find($id);
         if($address->customer_id==$customer->id){
             $address->delete();

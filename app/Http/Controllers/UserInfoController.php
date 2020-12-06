@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UserInfoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:webcustomer');
+        auth()->setDefaultDriver('webcustomer');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,7 @@ class UserInfoController extends Controller
      */
     public function index()
     {
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         return view('user.info.index',compact('customer'));
     }
 
@@ -75,7 +80,7 @@ class UserInfoController extends Controller
             'email'=>'required|email',
             'mobile'=>'required|numeric'
         ]);
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         $customer->name = $request->name;
         $customer->email= $request->email;
         $customer->mobile = $request->mobile;

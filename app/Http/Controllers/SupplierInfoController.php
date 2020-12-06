@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Helpers\SavePhoto;
 use App\Models\Category;
 use App\Models\City;
-use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class SupplierInfoController extends Controller
 {
     public function __construct()
-    { 
+    {
         $this->middleware('auth:webvendor');
         auth()->setDefaultDriver('webvendor');
     }
@@ -25,7 +24,7 @@ class SupplierInfoController extends Controller
         $vendor = auth()->user();
         $cities = City::all();
         $categories = Category::all();
-        return view('supplier.home',compact('vendor','cities','categories'));
+        return view('supplier.home', compact('vendor', 'cities', 'categories'));
     }
 
     /**
@@ -81,19 +80,19 @@ class SupplierInfoController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name'=>'required',
-            'city_id'=> 'required',
-            'category_id'=>'required',
-            'email'=>'required|email',
-            'open'=>'required'
+            'name' => 'required',
+            'city_id' => 'required',
+            'category_id' => 'required',
+            'email' => 'required|email',
+            'open' => 'required'
         ]);
-        $vendor = auth()->user();
+        $vendor = auth()->use=r();
         $vendor->name = $request->name;
-        $vendor->city_id = $request->city_id;    
+        $vendor->city_id = $request->city_id;
         $vendor->category_id = $request->category_id;
         $vendor->email = $request->email;
         $vendor->open = $request->open;
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $filename = SavePhoto::SaveImage($request->file('image'));
             $vendor->image = $filename;
             $vendor->update();
@@ -110,6 +109,5 @@ class SupplierInfoController extends Controller
      */
     public function destroy($id)
     {
-        
     }
 }

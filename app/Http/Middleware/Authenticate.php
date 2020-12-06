@@ -27,6 +27,8 @@ class Authenticate extends Middleware
             $current_guard = Arr::first($this->guards);
             if($current_guard==='webvendor'){
                 return route('supplierlogin');
+            }else if($current_guard==='webcustomer'){
+                return route('customerlogin');
             }
             return route('login');
         }

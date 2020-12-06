@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ClearCart extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:webcustomer');
+    }
     /**
      * Handle the incoming request.
      *
@@ -15,7 +19,7 @@ class ClearCart extends Controller
      */
     public function __invoke(Request $request)
     {
-        $customer = Customer::all()[0];
+        $customer = auth('webcustomer')->user();
         $cart_items=$customer->cart_items;
         $cart_items->each->delete();
         return redirect()->back();

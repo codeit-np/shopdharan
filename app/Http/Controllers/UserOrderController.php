@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CartData;
 use App\Helpers\OrderStatus;
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class UserOrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:webcustomer');
+        auth()->setDefaultDriver('webcustomer');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +23,7 @@ class UserOrderController extends Controller
     public function index(Request $request)
     {
         $order_statuses = OrderStatus::get();
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $orders_query = $customer->orders();
         if($request->has('status')){
             $orders_query->where('status',$request->status);
@@ -50,7 +54,7 @@ class UserOrderController extends Controller
         $request->validate([
             'address_id' => 'required'
         ]);
-            $customer = Customer::all()->first();
+            $customer = auth()->user();
             $data = CartData::getCartData($customer);
             $order = new Order();
             $order->address_id = $request->address_id;
@@ -85,7 +89,7 @@ class UserOrderController extends Controller
      */
     public function show($id)
     {
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $order = Order::find($id);
         if($customer->id != $order->customer_id){
             return redirect()->back();
@@ -130,7 +134,7 @@ class UserOrderController extends Controller
 
     public function cancel($id){
         $order_statuses = OrderStatus::get();
-        $customer = Customer::all()->first();
+        $customer = auth()->user();
         $order = Order::find($id);
         if($customer->id != $order->customer_id){
             return redirect()->back();

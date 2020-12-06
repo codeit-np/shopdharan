@@ -3,67 +3,79 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>Shop Dharan - At Home Delivery On A Click Of A Button</title>
+    <title>Shop Dharan - At Home Delivery On A Click Of A Button</title>
 
-  <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
- 
-  <!-- Bootstrap core CSS -->
-  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
 
-  <!-- Custom styles for this template -->
-  <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Shop Dharan</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app">Home
+                        </a>
+                    </li>
+                    @if (auth('webcustomer')->check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/cart">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/order">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/app/info">My Info</a>
+                        </li>
+                        <form action="/app/logout" method="post" onsubmit="return confirm('Do You Want To Logout?')">
+                          @csrf
+                          @method('delete')
+                          <button type="submit" class="btn btn-danger float-right ml-1"> Logout</button>
+                        </form>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customerlogin') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('customerregister') }}">Register</a>
+                        </li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
     <div class="container">
-      <a class="navbar-brand" href="#">Shop Dharan</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/app">Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/app/cart">Cart</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/app/order">Orders</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/app/info">My Info</a>
-          </li>
-        </ul>
-      </div>
+
+        @yield('content')
+
     </div>
-  </nav>
-
-  <!-- Page Content -->
-  <div class="container">
-
-    @yield('content')
-
-  </div>
-  <!-- /.container -->
+    <!-- /.container -->
 
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 

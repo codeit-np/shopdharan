@@ -4,6 +4,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClearCart;
+use App\Http\Controllers\CustomerLoginController;
+use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierInfoController;
@@ -71,4 +73,9 @@ Route::group([
     Route::delete('clearcart', ClearCart::class);
     Route::get('supplier/{id}',[UserVendorController::class,'show']);
     Route::resource('address', UserAddressController::class);
+    Route::get('login', [CustomerLoginController::class,'showlogin'])->name('customerlogin');
+    Route::post('login',[CustomerLoginController::class,'login'])->name('customerlogin');
+    Route::get('register',[CustomerRegisterController::class,'showregister'])->name('customerregister');
+    Route::post('register',[CustomerRegisterController::class,'register'])->name('customerregister');
+    Route::delete('logout',[CustomerLoginController::class,'logout']);
 });

@@ -1,20 +1,20 @@
-@extends('supplier.app')
+@extends('user.index')
 
 @section('content')
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    @if (session('fail'))
-                        <div class="alert  alert-danger">
-                            {{ session('fail') }}
-                        </div>
-                    @endif
+
                     <div class="card-header">{{ __('Login') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('supplierlogin') }}">
+                        @if (session('fail'))
+                            <div class="alert  alert-danger">
+                                {{ session('fail') }}
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('customerlogin') }}">
                             @csrf
 
                             <div class="form-group row">
