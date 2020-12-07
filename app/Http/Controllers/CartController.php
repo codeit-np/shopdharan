@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:webcustomer');
+        auth()->setDefaultDriver('webcustomer');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         // $cart_items = $customer->cart_items;
         // $cart_items->load('product');
         // $total = 0;
@@ -59,7 +64,7 @@ class CartController extends Controller
             'qty' => 'integer|required|min:1|max:99'
         ]);
 
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         $product = Product::find($request->product_id);
         $vendor = $product->vendor;
         $cart_item = new UserCart();
@@ -90,7 +95,7 @@ class CartController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         $cart_item = UserCart::find($id);
         if ($customer->id != $cart_item->customer_id) {
             return redirect()->back();
@@ -111,7 +116,7 @@ class CartController extends Controller
         $request->validate([
             'qty' => 'integer|required|min:1|max:99'
         ]);
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         $cart_item = UserCart::find($id);
         if ($customer->id != $cart_item->customer_id) {
             return redirect()->back();
@@ -129,7 +134,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         $cart_item = UserCart::find($id);
         if ($customer->id != $cart_item->customer_id) {
             return redirect()->back();
@@ -139,7 +144,7 @@ class CartController extends Controller
     }
     public function confirm()
     {
-        $customer = Customer::all()[0];
+        $customer = auth()->user();
         $delivery = intval(env('DELIVERY_CHARGE', 50));
         $addresses = $customer->addresses;
         $addresses->load('city');

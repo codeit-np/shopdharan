@@ -237,6 +237,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <form action="{{ route('logout') }}" method="post"
+                                    onsubmit="return confirm('Do You Want To Logout?')"
+                                >
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class= "btn btn-block btn-danger btn-small">
+                                            {{-- <i class="nav-icon fas fa-truck"></i> --}}
+                                            Logout
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

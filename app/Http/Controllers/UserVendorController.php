@@ -57,7 +57,9 @@ class UserVendorController extends Controller
     {
         $vendor = Vendor::find($id);
         $products = $vendor->products;
-        return view('user.supplier.show', compact('vendor','products'));
+        $category = $vendor->category;
+        $vendors = $category->vendors;
+        return view('user.supplier.show', compact('vendor','products','vendors'));
     }
 
     /**

@@ -33,17 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/supplier" class="nav-link">Home</a>
                 </li>
-                @if (auth('webvendor')->check())
-
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <form action="/supplier/logout" method="post"
-                            onsubmit="return confirm('Are You Sure You Wan to Logout?')">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger float-right">Logout</button>
-                        </form>
-                    </li>
-                  @else 
+                @if (!auth('webvendor')->check())
                   <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ route('supplierlogin') }}" class="nav-link">Login</a>
                   </li>
@@ -213,6 +203,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                         </ul>
+                        <li class="nav-item">
+                            <form action="{{ route('supplier.logout') }}" method="post"
+                                onsubmit="return confirm('Do You Want To Logout?')"
+                            >
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class= "btn btn-block btn-danger btn-small">
+                                        {{-- <i class="nav-icon fas fa-truck"></i> --}}
+                                        Logout
+                                </button>
+                            </form>
+                        </li>
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>

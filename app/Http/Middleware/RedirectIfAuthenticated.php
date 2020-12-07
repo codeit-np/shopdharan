@@ -23,10 +23,21 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                switch($guard){
+                    case 'webvendor':
+                        return redirect('supplier.home');
+                    break;
+                    case 'webcustomer':
+                        return redirect('customer.home');
+                    default:
+                        return redirect('home');
+                }
             }
         }
 
         return $next($request);
     }
+
+
 }

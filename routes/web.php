@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClearCart;
+use App\Http\Controllers\CreateAdminController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\EmployeeController;
@@ -37,15 +38,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
+// Auth::routes();
+Route::get('/create', CreateAdminController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('cities', CityController::class);
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
 Route::resource('orders',OrderController::class);
 Route::resource('employees', EmployeeController::class);
-Route::delete('logout',[EmployeeLoginController::class,'logout']);
+Route::get('login',[EmployeeLoginController::class,'show'])->name('login');
+Route::post('login',[EmployeeLoginController::class,'process'])->name('login');
+Route::delete('logout',[EmployeeLoginController::class,'logout'])->name('logout');
 
 Route::group([
     'prefix' => 'supplier'
@@ -57,7 +60,7 @@ Route::group([
     Route::resource('orders',VendorOrderController::class);
     Route::get('login',[SupplierLoginController::class,'show'])->name('supplierlogin');
     Route::post('login',[SupplierLoginController::class,'process'])->name('supplierlogin');
-    Route::delete('logout',[SupplierLoginController::class, 'logout']);
+    Route::delete('logout',[SupplierLoginController::class, 'logout'])->name('supplier.logout');
 });
 
 Route::group([
