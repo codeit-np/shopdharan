@@ -238,6 +238,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{ route('admin.changepassword') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-lock"></i>
+                                    <p>
+                                        Change Password
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <form action="{{ route('logout') }}" method="post"
                                     onsubmit="return confirm('Do You Want To Logout?')"
                                 >

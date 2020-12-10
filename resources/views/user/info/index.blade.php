@@ -13,7 +13,7 @@
                 <a href="/app/address" class="list-group-item">
                     Addreses
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="{{ route('customerchangepassword') }}" class="list-group-item">
                     Update Password
                 </a>
             </div>

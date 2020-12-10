@@ -164,4 +164,12 @@ class VendorController extends Controller
         Vendor::destroy($id);
         return redirect('/vendors/create');
     }
+    public function updatepassword(Request $request, $id){
+        $request->validate([
+            'password'=> 'required|confirmed|min:6'
+        ]);
+        $vendor = Vendor::find($id);
+        $vendor->password = Hash::make($request->password);
+        return redirect()->back()->with('success','Password Updated');
+    }
 }

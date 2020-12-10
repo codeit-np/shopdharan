@@ -202,6 +202,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('supplier.changepassword') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-lock"></i>
+                                    <p>
+                                        Change Password
+                                    </p>
+                                </a>
+                            </li>
                         </ul>
                         <li class="nav-item">
                             <form action="{{ route('supplier.logout') }}" method="post"
