@@ -25,7 +25,7 @@
                     Add Employees
                 </div>
                 <div class="card-body">
-                    <form action="/employees" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('employees.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Employee Name</label>
@@ -74,11 +74,11 @@
                                 <td>{{ $employee->email }}</td>
                                 <td>{{ $employee->is_admin ? 'Admin' : 'Employee' }}</td>
                                 <td>
-                                    <form action="/employees/{{ $employee->id }}" method="post"
+                                    <form action="{{ route('employees.destroy',[$employee->id]) }}" method="post"
                                         onsubmit="return confirm('Are You Sure You Want To Delete?')">
                                         @csrf
                                         @method('delete')
-                                        <a href="/employees/{{ $employee->id }}/edit" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('employees.edit',[$employee->id]) }}" class="btn btn-primary btn-sm">Edit</a>
                                         <button type="submit" class="btn btn-danger btn-sm">
                                             Delete
                                         </button>

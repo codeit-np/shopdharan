@@ -6,11 +6,11 @@
         <div class="col-md-3">
             {{-- <h1 class="my-4">Links</h1> --}}
             <div class="list-group">
-                <a href="/orders" class="list-group-item">
+                <a href="{{ route('admin.orders.index') }}" class="list-group-item">
                     All
                 </a>
                 @foreach ($order_statuses as $id => $status)
-                    <a href="/orders?status={{ $status }}" class="list-group-item" title="{{ $status }}">
+                    <a href="{{ route('admin.orders.index') }}?status={{ $status }}" class="list-group-item" title="{{ $status }}">
                         {{ $status }}
                     </a>
                 @endforeach
@@ -43,7 +43,7 @@
                                 <td>{{ $order->net_total }}</td>
                                 <td>{{ $order->ordered_time }}</td>
                                 <td>
-                                    <a href="/orders/{{ $order->id }}/edit" title="View Order">
+                                    <a href="{{ route('admin.orders.edit',[$order->id]) }}" title="View Order">
                                         <i class="nav-icon fas fa-eye "></i>
                                     </a>
                                 </td>

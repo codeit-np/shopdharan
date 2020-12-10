@@ -7,7 +7,7 @@
                     Add Category
                 </div>
                 <div class="card-body">
-                    <form action="/categories" method="post">
+                    <form action="{{ route('categories.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="name">Cateogory</label>
@@ -35,7 +35,7 @@
                         <tr>
                             <td>{{ $index+1 }}</td>
                             <td>{{ $category->category }}</td>
-                            <td><a href="/categories/{{ $category->id }}/edit" class="btn btn-primary btn-sm">Edit</a></td>
+                            <td><a href="{{ route('categories.edit',[$category->id]) }}" class="btn btn-primary btn-sm">Edit</a></td>
                         </tr>
                     @endforeach
                 </table>

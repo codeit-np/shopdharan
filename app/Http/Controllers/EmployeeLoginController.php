@@ -22,13 +22,13 @@ class EmployeeLoginController extends Controller
         // dd($credentials);
         $remember = $request->has('remember')?true:false;
         if(auth()->attempt($credentials,$remember)){
-            return redirect('/home');
+            return redirect()->route('admin.home');
         }
         return redirect()->back()->with('fail','Invalid Credentials');
     }
 
     public function logout(){
         auth()->logout();
-        return redirect('/home');
+        return redirect()->route('admin.home');
     }
 }

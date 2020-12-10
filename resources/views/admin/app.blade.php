@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
                 @if (!auth()->check())
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{ route('login') }}" class="nav-link">Login</a>
+                        <a href="{{ route('admin.login') }}" class="nav-link">Login</a>
                     </li>
                 @endif
             </ul>
@@ -155,9 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="/" class="brand-link">
                 <span class="brand-text font-weight-light">Shop Dharan</span>
             </a>
 
@@ -173,7 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 alt="User Image">
                         </div> --}}
                         <div class="info">
-                            <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                            <a href="{{ route('employees.edit',[auth()->id()]) }}" class="d-block">{{ auth()->user()->name }}</a>
                         </div>
                     </div>
 
@@ -185,16 +183,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
 
                             <li class="nav-item">
-                                <a href="/home" class="nav-link">
+                                <a href="{{ route('admin.home') }}" class="nav-link">
                                     <i class="nav-icon fas fa-chart-line"></i>
                                     <p>
-                                        Dashboard
+                                        Home
                                     </p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="/employees/create" class="nav-link">
+                                <a href="{{ route('employees.create') }}" class="nav-link">
                                     <i class="nav-icon fas fa-store"></i>
                                     <p>
                                         Add Employee
@@ -203,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
 
                             <li class="nav-item">
-                                <a href="/vendors/create" class="nav-link">
+                                <a href="{{ route('vendors.create') }}" class="nav-link">
                                     <i class="nav-icon fas fa-store"></i>
                                     <p>
                                         Add Vendor
@@ -212,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
 
                             <li class="nav-item">
-                                <a href="/cities/create" class="nav-link">
+                                <a href="{{ route('cities.create') }}" class="nav-link">
                                     <i class="nav-icon fas fa-city"></i>
                                     <p>
                                         Add City
@@ -221,7 +219,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
 
                             <li class="nav-item">
-                                <a href="/categories/create" class="nav-link">
+                                <a href="{{ route('categories.create') }}" class="nav-link">
                                     <i class="nav-icon fas fa-industry"></i>
                                     <p>
                                         Add Category
@@ -230,7 +228,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
 
                             <li class="nav-item">
-                                <a href="/orders" class="nav-link">
+                                <a href="{{ route('admin.orders.index') }}" class="nav-link">
                                     <i class="nav-icon fas fa-truck"></i>
                                     <p>
                                         See Orders
@@ -246,7 +244,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <form action="{{ route('logout') }}" method="post"
+                                <form action="{{ route('admin.logout') }}" method="post"
                                     onsubmit="return confirm('Do You Want To Logout?')"
                                 >
                                     @csrf

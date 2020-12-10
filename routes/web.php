@@ -42,17 +42,19 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
-Route::get('/create', CreateAdminController::class);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/create', CreateAdminController::class)->name('admin.create');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
 Route::resource('cities', CityController::class);
 Route::put('/vendors/{vendor}/updatepassword',[VendorController::class,'updatepassword'])->name('vendors.update.password');
 Route::resource('vendors',VendorController::class);
 Route::resource('categories',CategoryController::class);
-Route::resource('orders',OrderController::class);
+Route::resource('orders',OrderController::class,[
+    'as'=>'admin'
+]);
 Route::resource('employees', EmployeeController::class);
-Route::get('login',[EmployeeLoginController::class,'show'])->name('login');
-Route::post('login',[EmployeeLoginController::class,'process'])->name('login');
-Route::delete('logout',[EmployeeLoginController::class,'logout'])->name('logout');
+Route::get('login',[EmployeeLoginController::class,'show'])->name('admin.login');
+Route::post('login',[EmployeeLoginController::class,'process'])->name('admin.login');
+Route::delete('logout',[EmployeeLoginController::class,'logout'])->name('admin.logout');
 Route::get('changepassword',[AdminChangePasswordController::class, 'show'])->name('admin.changepassword');
 Route::put('changepassword',[AdminChangePasswordController::class, 'change'])->name('admin.changepassword');
 
@@ -61,7 +63,7 @@ Route::group([
 ], function ($router) {
     
     Route::get('',[SupplierInfoController::class,'index'])->name('supplier.home');
-    Route::put('',[SupplierInfoController::class,'update']);
+    Route::put('',[SupplierInfoController::class,'update'])->name('supplier.update');
     Route::resource('products', SupplierProductController::class);
     Route::resource('orders',VendorOrderController::class);
     Route::get('login',[SupplierLoginController::class,'show'])->name('supplierlogin');
@@ -76,15 +78,15 @@ Route::group([
 ], function ($router) {
     
     Route::get('',[UserVendorController::class,'index'])->name('customer.home');
-    Route::get('product/{id}',[UserProductController::class,'show']);
-    Route::get('cart/confirm', [CartController::class,'confirm']);
+    Route::get('product/{id}',[UserProductController::class,'show'])->name('customer.product');
+    Route::get('cart/confirm', [CartController::class,'confirm'])->name('cart.confirm');
     Route::resource('cart',CartController::class);
     Route::resource('order', UserOrderController::class);
-    Route::post('order/{id}/cancel',[UserOrderController::class,'cancel']);
-    Route::get('info', [UserInfoController::class,'index']);
-    Route::put('info', [UserInfoController::class,'update']);
-    Route::delete('clearcart', ClearCart::class);
-    Route::get('supplier/{id}',[UserVendorController::class,'show']);
+    Route::post('order/{id}/cancel',[UserOrderController::class,'cancel'])->name('order.cancel');
+    Route::get('info', [UserInfoController::class,'index'])->name('customer.info');
+    Route::put('info', [UserInfoController::class,'update'])->name('customer.info');
+    Route::delete('clearcart', ClearCart::class)->name('cart.cancel');
+    Route::get('supplier/{id}',[UserVendorController::class,'show'])->name('customer.supplier');
     Route::resource('address', UserAddressController::class);
     Route::get('login', [CustomerLoginController::class,'showlogin'])->name('customerlogin');
     Route::post('login',[CustomerLoginController::class,'login'])->name('customerlogin');

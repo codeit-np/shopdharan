@@ -7,7 +7,7 @@
                     Add City
                 </div>
                 <div class="card-body">
-                    <form action="/cities" method="post">
+                    <form action="{{ route('cities.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="city">City</label>
@@ -35,7 +35,7 @@
                         <tr>
                             <td>{{ $index+1 }}</td>
                             <td>{{ $city->city }}</td>
-                            <td><a href="/cities/{{ $city->id }}/edit" class="btn btn-primary btn-sm">Edit</a></td>
+                            <td><a href="{{ route('cities.edit',[$city->id]) }}" class="btn btn-primary btn-sm">Edit</a></td>
                         </tr>
                     @endforeach
                 </table>

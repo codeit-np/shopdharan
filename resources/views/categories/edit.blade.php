@@ -7,7 +7,7 @@
                     Add Category
                 </div>
                 <div class="card-body">
-                    <form action="/categories/{{ $category->id }}" method="post">
+                    <form action="{{ route('categories.update',[$category->id]) }}" method="post">
                         @csrf
                         @method('put')
                         <div class="form-group">
@@ -16,7 +16,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary float-right">Update</button>
                     </form>
-                    <form action="/categories/{{ $category->id }}" method="post"
+                    <form action="{{ route('categories.destroy',[$category->id]) }}" method="post"
                         onsubmit="return confirm('Are You Sure You Want To Delete?')"
                         >
                         @csrf

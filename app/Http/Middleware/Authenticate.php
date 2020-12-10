@@ -30,7 +30,7 @@ class Authenticate extends Middleware
             }else if($current_guard==='webcustomer'){
                 return route('customerlogin');
             }
-            return route('login');
+            return route('admin.login');
         }
     }
 }

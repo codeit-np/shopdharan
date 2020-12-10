@@ -29,7 +29,7 @@ class CreateAdminController extends Controller
         $data = array('name'=>"message");
    
         Mail::send(['text'=>'mail'], $data, function($message) {
-           $message->to('sajal.np@gmail.com', 'Code It')->subject
+           $message->to('theonlysamir@gmail.com', 'Code It')->subject
               ('Laravel Basic Testing Mail');
            $message->from('support@shopdharan.com','Shop Dharan');
         });

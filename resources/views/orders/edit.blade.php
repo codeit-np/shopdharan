@@ -42,7 +42,7 @@
                             <th>{{ $order->net_total }}</th>
                         </tr>
                     </table>
-                    <form action="/orders/{{ $order->id }}" method="post">
+                    <form action="{{ route('admin.orders.update',[$order->id]) }}" method="post">
                         @csrf
                         @method('put')
                         <div class="form-group mt-3">
