@@ -112,6 +112,6 @@ class CityController extends Controller
             return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
         }
         City::destroy($id);
-        return redirect('/cities/create');
+        return redirect()->route('cities.create');
     }
 }

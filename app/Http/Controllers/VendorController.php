@@ -162,7 +162,7 @@ class VendorController extends Controller
     {
         //
         Vendor::destroy($id);
-        return redirect('/vendors/create');
+        return redirect()->route('admin.create');
     }
     public function updatepassword(Request $request, $id){
         $request->validate([

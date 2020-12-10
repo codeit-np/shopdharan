@@ -102,6 +102,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-        return redirect('/categories/create');
+        return redirect()->route('categories.create');
     }
 }
