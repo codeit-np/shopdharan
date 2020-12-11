@@ -23,12 +23,13 @@ class CustomerLoginController extends Controller
         $credentials = $request->only(['email','password']);
         $remember = $request->has('remember')?true:false;
         if(auth()->attempt($credentials,$remember)){
-            return redirect('/app');
+            return redirect()->route('customer.home');
         }
         return redirect()->back()->with('fail','Invalid Credentials');
     }
     public function logout(){
         auth()->logout();
-        return redirect('/app');
+        return redirect()->route('customer.home');
     }
 }
+ 

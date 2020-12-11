@@ -86,7 +86,7 @@ class SupplierInfoController extends Controller
             'email' => 'required|email',
             'open' => 'required'
         ]);
-        $vendor = auth()->use=r();
+        $vendor = auth()->user();
         $vendor->name = $request->name;
         $vendor->city_id = $request->city_id;
         $vendor->category_id = $request->category_id;

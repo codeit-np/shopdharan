@@ -130,6 +130,6 @@ class UserAddressController extends Controller
         if($address->customer_id==$customer->id){
             $address->delete();
         }
-        return redirect()->back();
+        return redirect()->route('address.index');
     }
 }

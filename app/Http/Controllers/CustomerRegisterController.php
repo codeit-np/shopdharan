@@ -33,7 +33,7 @@ class CustomerRegisterController extends Controller
         $customer->save();
         $credentials = $request->only(['email','password']);
         if(auth()->attempt($credentials,$remember)){
-            return redirect('/app');
+            return redirect()->route('customer.home');
         }
         return redirect()->back()->with('fail','failed to signup');
     }

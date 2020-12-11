@@ -78,7 +78,7 @@ class UserOrderController extends Controller
             }
         $order->items()->saveMany($order_items);
         $cart_items->each->delete();
-        return redirect('/app/order/'.$order->id);    
+        return redirect()->route('order.show',[$order->id]);    
     }
     
     /**

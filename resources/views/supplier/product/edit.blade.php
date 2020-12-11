@@ -19,7 +19,7 @@
                 </div>
                 <img src="{{ $product->image }}" class="rounded img-fluid img-thumbnail" alt="{{ $product->name }}">
                 <div class="card-body">
-                    <form action="/supplier/products/{{ $product->id }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('products.update',[$product->id]) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="form-group">
@@ -57,7 +57,7 @@
                         <button type="submit" class="btn btn-primary float-right">Update</button>
                     </form>
 
-                    <form action="/supplier/products/{{ $product->id }}" method="post"
+                    <form action="{{ route('products.destroy',[$product->id]) }}" method="post"
                         onsubmit="return confirm('Are You Sure You Want To Delete?')">
                         @csrf
                         @method('delete');
@@ -89,7 +89,7 @@
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->discount }}</td>
                                 <td>{{ $product->available ? 'Yes' : 'No' }}</td>
-                                <td><a href="/supplier/products/{{ $product->id }}/edit"
+                                <td><a href="{{ route('products.edit',[$product->id]) }}"
                                         class="btn btn-primary btn-sm">Edit</a></td>
                             </tr>
                         @endforeach

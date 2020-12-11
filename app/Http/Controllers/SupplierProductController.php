@@ -143,6 +143,6 @@ class SupplierProductController extends Controller
             return redirect()->back()->with('fail', "You're Not Allowed To Do That");
         }
         $product->delete();
-        return redirect('/supplier/products/create');
+        return redirect()->route('products.create');
     }
 }

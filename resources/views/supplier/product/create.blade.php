@@ -13,7 +13,7 @@
                     Add Product
                 </div>
                 <div class="card-body">
-                    <form action="/supplier/products" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Product Name</label>
@@ -72,7 +72,7 @@
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->discount }}</td>
                                 <td>{{ $product->available ? 'Yes' : 'No' }}</td>
-                                <td><a href="/supplier/products/{{ $product->id }}/edit"
+                                <td><a href="{{ route('products.edit',[$product->id]) }}"
                                         class="btn btn-primary btn-sm">Edit</a></td>
                             </tr>
                         @endforeach

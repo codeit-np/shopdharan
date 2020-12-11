@@ -9,11 +9,11 @@
          <div class="col-md-3">
             {{-- <h1 class="my-4">Links</h1> --}}
             <div class="list-group">
-                <a href="/supplier/orders" class="list-group-item">
+                <a href="{{ route('supplier.orders.index') }}" class="list-group-item">
                     All
                 </a>
                 @foreach ($order_statuses as $id => $status)
-                    <a href="/supplier/orders?status={{ $status }}" class="list-group-item" title="{{ $status }}">
+                    <a href="{{ route('supplier.orders.index') }}?status={{ $status }}" class="list-group-item" title="{{ $status }}">
                         {{ $status }}
                     </a>
                 @endforeach
@@ -40,7 +40,7 @@
                             <tr>
                                 <td>{{ ++$index }}</td>
                                 <td>
-                                    <a href="/supplier/products/{{ $item->product->id }}/edit"
+                                    <a href="{{ route('products.edit',[$item->product->id]) }}"
                                         title="Go To {{ $item->product->name }}'s Page'" class="d-flex align-items-start">
                                         <img src="{{ $item->product->image ? $item->product->image : '/images/noimage.png' }}"
                                             class="mr-2" style='width:3em;height:3em;object-fit:cover'>

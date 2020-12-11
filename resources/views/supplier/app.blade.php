@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>ShopDharan</title>
-
+ 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </li>
                 @if (!auth('webvendor')->check())
                   <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('supplierlogin') }}" class="nav-link">Login</a>
+                    <a href="{{ route('supplier.login') }}" class="nav-link">Login</a>
                   </li>
                 @endif
             </ul>
@@ -156,8 +156,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Shop Dharan</span>
             </a>
 
@@ -172,7 +170,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 alt="User Image">
                         </div> --}}
                         <div class="info">
-                            <a href="/supplier" class="d-block">{{ auth()->user()->name }}</a>
+                            <a href="{{ route('supplier.home') }}" class="d-block">
+                                <img src="{{ auth()->user()->image }}" alt=""
+                           class="brand-image img-circle elevation-3 mr-1" style="opacity: .8">    
+                                {{ auth()->user()->name }}
+                            </a>
                         </div>
                     </div>
 
@@ -185,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             <li class="nav-item">
-                                <a href="/supplier/products/create " class="nav-link">
+                                <a href="{{ route('products.create') }} " class="nav-link">
                                     <i class="nav-icon fas fa-shopping-bag"></i>
                                     <p>
                                         Add Product
@@ -195,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             <li class="nav-item">
-                                <a href="/supplier/orders" class="nav-link">
+                                <a href="{{ route('supplier.orders.index') }}" class="nav-link">
                                     <i class="nav-icon fas fa-truck"></i>
                                     <p>
                                         See Orders

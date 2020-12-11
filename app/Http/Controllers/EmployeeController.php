@@ -130,6 +130,6 @@ class EmployeeController extends Controller
         }
         $employee = User::find($id);
         $employee->delete();
-        return redirect('/employees/create')->with('success', 'Employee Deleted Successfully');
+        return redirect()->route('employees.create')->with('success', 'Employee Deleted Successfully');
     }
 }

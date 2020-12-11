@@ -65,9 +65,11 @@ Route::group([
     Route::get('',[SupplierInfoController::class,'index'])->name('supplier.home');
     Route::put('',[SupplierInfoController::class,'update'])->name('supplier.update');
     Route::resource('products', SupplierProductController::class);
-    Route::resource('orders',VendorOrderController::class);
-    Route::get('login',[SupplierLoginController::class,'show'])->name('supplierlogin');
-    Route::post('login',[SupplierLoginController::class,'process'])->name('supplierlogin');
+    Route::resource('orders',VendorOrderController::class,[
+        'as'=>"supplier",
+    ]);
+    Route::get('login',[SupplierLoginController::class,'show'])->name('supplier.login');
+    Route::post('login',[SupplierLoginController::class,'process'])->name('supplier.login');
     Route::delete('logout',[SupplierLoginController::class, 'logout'])->name('supplier.logout');
     Route::get('changepassword',[SupplierChangePasswordController::class,'show'])->name('supplier.changepassword');
     Route::put('changepassword',[SupplierChangePasswordController::class,'change'])->name('supplier.changepassword');
@@ -76,7 +78,7 @@ Route::group([
 Route::group([
     'prefix' => 'app'
 ], function ($router) {
-    
+     
     Route::get('',[UserVendorController::class,'index'])->name('customer.home');
     Route::get('product/{id}',[UserProductController::class,'show'])->name('customer.product');
     Route::get('cart/confirm', [CartController::class,'confirm'])->name('cart.confirm');

@@ -26,13 +26,13 @@ class SupplierLoginController extends Controller
         $credentials = $request->only(['email','password']);
         $remember = $request->has('remember')?true:false;
         if(auth()->attempt($credentials,$remember)){
-            return redirect('/supplier');
+            return redirect()->route('supplier.home');
         }
         return redirect()->back()->with('fail','Invalid Credentials');
     }
 
     public function logout(){
         auth()->logout();
-        return redirect('/supplier');
+        return redirect()->route('supplier.home');
     }
 }
