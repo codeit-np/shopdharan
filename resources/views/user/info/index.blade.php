@@ -7,20 +7,20 @@
         <div class="col-md-3">
             {{-- <h1 class="my-4">Links</h1> --}}
             <div class="list-group">
-                <a href="/app/info" class="list-group-item active">
+                <a href="{{ route('customer.info')  }}" class="list-group-item active">
                     Info
                 </a>
-                <a href="/app/address" class="list-group-item">
+                <a href="{{ route('address.index') }}"  class="list-group-item">
                     Addreses
                 </a>
-                <a href="{{ route('customerchangepassword') }}" class="list-group-item">
+                <a href="{{ route('customer.changepassword') }}" class="list-group-item">
                     Update Password
                 </a>
             </div>
         </div>
         {{-- Links End --}}
         <div class="col-md-9 float-right">
-            <form action="/app/info" method="post" enctype="multipart/form-data">
+            <form action="{{ route('customer.info') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="form-group">

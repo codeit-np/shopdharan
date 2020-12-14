@@ -25,7 +25,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Shop Dharan</a>
+            <a class="navbar-brand" href="{{ route('customer.home') }}">Shop Dharan</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,30 +33,30 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/app">Home
+                        <a class="nav-link" href="{{ route('customer.home') }}">Home
                         </a>
                     </li>
                     @if (auth('webcustomer')->check())
                         <li class="nav-item">
-                            <a class="nav-link" href="/app/cart">Cart</a>
+                            <a class="nav-link" href="{{ route('cart.index') }}">Cart</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/app/order">Orders</a>
+                            <a class="nav-link" href="{{ route('customer.order.index') }}">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/app/info">My Info</a>
+                            <a class="nav-link" href="{{ route('customer.info') }}">My Info</a>
                         </li>
-                        <form action="/app/logout" method="post" onsubmit="return confirm('Do You Want To Logout?')">
+                        <form action="{{ route('customer.logout') }}" method="post" onsubmit="return confirm('Do You Want To Logout?')">
                           @csrf
                           @method('delete')
                           <button type="submit" class="btn btn-danger float-right ml-1"> Logout</button>
                         </form>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customerlogin') }}">Login</a>
+                            <a class="nav-link" href="{{ route('customer.login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('customerregister') }}">Register</a>
+                            <a class="nav-link" href="{{ route('customer.register') }}">Register</a>
                         </li>
                     @endif
                 </ul>

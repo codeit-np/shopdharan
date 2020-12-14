@@ -44,7 +44,7 @@
                         </tr>
 
                     </table>
-                    <form action="/app/order/{{ $order->id }}/cancel"
+                    <form action="{{ route('order.cancel',[$order->id]) }}"
                         onsubmit="return confirm('Are You Sure You Want To Cancel?')" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm float-right">
@@ -73,7 +73,7 @@
                             <tr>
                                 <td>{{ ++$index }}</td>
                                 <td>
-                                    <a href="/app/product/{{ $item->product->id }}"
+                                    <a href="{{ route('customer.product',[$item->product->id]) }}"
                                         title="Go To {{ $item->product->name }}'s Page'" class="d-flex align-items-start">
                                         <img src="{{ $item->product->image ? $item->product->image : '/images/noimage.png' }}"
                                             class="mr-2" style='width:3em;height:3em;object-fit:cover'>

@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/supplier" class="nav-link">Home</a>
+                    <a href="{{ route('supplier.home') }}" class="nav-link">Home</a>
                 </li>
                 @if (!auth('webvendor')->check())
                   <li class="nav-item d-none d-sm-inline-block">

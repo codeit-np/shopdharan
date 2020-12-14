@@ -18,7 +18,7 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('customerchangepassword') }}">
+                        <form method="POST" action="{{ route('customer.changepassword') }}">
                             @csrf
                             @method('put')
 

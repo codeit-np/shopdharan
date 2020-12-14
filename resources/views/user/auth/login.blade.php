@@ -14,7 +14,7 @@
                                 {{ session('fail') }}
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('customerlogin') }}">
+                        <form method="POST" action="{{ route('customer.login') }}">
                             @csrf
 
                             <div class="form-group row">

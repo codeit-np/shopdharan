@@ -7,13 +7,13 @@
         <div class="col-md-3">
             {{-- <h1 class="my-4">Links</h1> --}}
             <div class="list-group">
-                <a href="/app/info" class="list-group-item">
+                <a href="{{ route('customer.info') }}" class="list-group-item">
                     Info
                 </a>
-                <a href="/app/address" class="list-group-item active">
+                <a href="{{ route('address.index') }}" class="list-group-item active">
                     Addreses
                 </a>
-                <a href="{{ route('customerchangepassword') }}" class="list-group-item">
+                <a href="{{ route('customer.changepassword') }}" class="list-group-item">
                     Update Password
                 </a>
             </div>
@@ -29,7 +29,7 @@
                             Add Address
                         </div>
                         <div class="card-body">
-                            <form action="/app/address" method="post">
+                            <form action="{{ route('address.store') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="city_id">City</label>
@@ -82,13 +82,13 @@
                                         <td>{{ $address->city->city }}</td>
                                         <td>{{ $address->street }}</td>
                                         <td>
-                                            <form action="/app/address/{{ $address->id }}" method="post"
+                                            <form action="{{ route('address.destroy',[$address->id]) }}" method="post"
                                                 onsubmit="return confirm('Are You Sure You Want To Delete?')"
                                                 >
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                <a href="/app/address/{{ $address->id }}/edit" class="ml-3" title="Edit" >
+                                                <a href="{{ route('address.edit',[$address->id]) }}" class="ml-3" title="Edit" >
                                                     <i class="nav-icon fas fa-edit "></i>
                                                 </a>
                                             </form>

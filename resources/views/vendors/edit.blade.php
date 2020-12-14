@@ -19,7 +19,7 @@
                 </div>
                 <img src="{{ $vendor->image }}" class="rounded img-fluid img-thumbnail" alt="{{ $vendor->name }}">
                 <div class="card-body">
-                    <form action="/vendors/{{ $vendor->id }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('vendors.update',[$vendor->id]) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="form-group">
@@ -92,7 +92,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary float-right">Save</button>
                     </form>
-                    <form action="/vendors/{{ $vendor->id }}" method="post"
+                    <form action="{{ route('vendors.destroy',[$vendor->id]) }}" method="post"
                         onsubmit="return confirm('Are You Sure You Want To Delete?')">
                         @csrf
                         @method('delete')

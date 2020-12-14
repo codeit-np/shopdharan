@@ -17,7 +17,7 @@
                 {{ $cart_item->product->description }} 
                </p>
             
-            <form action="/app/cart/{{ $cart_item->id }}" method="post">
+            <form action="{{ route('cart.update',[$cart_item->id]) }}" method="post">
                 @csrf
                 @method('put')
                     @csrf
@@ -27,7 +27,7 @@
                     </div>
                   <button type="submit" class="btn btn-primary float-right mb-4 mr-2">Update Item</button>
             </form>
-            <form action="/app/cart/{{ $cart_item->id }}" method="post"
+            <form action="{{ route('cart.destroy',[$cart_item->id]) }}" method="post"
                 onsubmit="return confirm('Are You Sure You Want To Delete?')"
                 >
                 @csrf

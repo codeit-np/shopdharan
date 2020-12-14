@@ -11,9 +11,9 @@
                 {{-- <a href="#" class="list-group-item">Category 1</a>
                 <a href="#" class="list-group-item">Category 2</a>
                 <a href="#" class="list-group-item">Category 3</a> --}}
-                <a href="/app" class="list-group-item">All</a>
+                <a href="{{ route('customer.home') }}" class="list-group-item">All</a>
                 @foreach ($categories as $category)
-                    <a href="/app?category={{ $category->id }}" class="list-group-item">{{ $category->category }}</a>
+                    <a href="{{ route('customer.home') }}?category={{ $category->id }}" class="list-group-item">{{ $category->category }}</a>
                 @endforeach
             </div>
 
@@ -41,11 +41,12 @@
                 @foreach ($vendors as $vendor)
                     <div class="col-lg-3 col-md-4 mb-4">
                         <div class="card h-100 shadow">
-                            <a href="/app/supplier/{{ $vendor->id }}"><img class="card-img-top .img-fluid image-card-small"
-                                    src="{{ $vendor->image ? $vendor->image : '/images/noimage.png' }}" alt=""></a>
+                            <a href="{{ route('customer.supplier',[$vendor->id]) }}">
+                                <img class="card-img-top .img-fluid image-card-small"
+                                src="{{ $vendor->image ? $vendor->image : '/images/noimage.png' }}" alt=""></a>
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a href="/app/supplier/{{ $vendor->id }}">{{ $vendor->name }}</a>
+                                    <a href="{{ route('customer.supplier',[$vendor->id]) }}">{{ $vendor->name }}</a>
                                 </h4>
                                 {{ $vendor->city->city }}
                             </div>

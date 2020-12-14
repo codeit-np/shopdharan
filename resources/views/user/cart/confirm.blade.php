@@ -39,7 +39,7 @@
                             <th>Rs.{{ $total + $delivery }}</th>
                         </tr>
                     </table>
-                    <form action="/app/order" method="post">
+                    <form action="{{ route('customer.order.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="address_id">Address Line</label>
@@ -52,7 +52,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary float-right ">Confirm Order</button>
                     </form>
-                    <a href="/app/cart" class="btn btn-secondary float-left "> Go Back</a>
+                    <a href="{{ route('cart.index') }}" class="btn btn-secondary float-left "> Go Back</a>
                 </div>
             </div>
         </div>

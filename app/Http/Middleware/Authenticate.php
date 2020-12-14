@@ -28,7 +28,7 @@ class Authenticate extends Middleware
             if($current_guard==='webvendor'){
                 return route('supplier.login');
             }else if($current_guard==='webcustomer'){
-                return route('customerlogin');
+                return route('customer.login');
             }
             return route('admin.login');
         }

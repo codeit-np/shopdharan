@@ -6,11 +6,11 @@
         <div class="col-md-3">
             {{-- <h1 class="my-4">Links</h1> --}}
             <div class="list-group">
-                <a href="/app/order" class="list-group-item">
+                <a href="{{ route('customer.order.index') }}" class="list-group-item">
                     All
                 </a>
                 @foreach ($order_statuses as $id=>$status)
-                <a href="/app/order?status={{ $status }}" class="list-group-item" 
+                <a href="{{ route('customer.order.index') }}?status={{ $status }}" class="list-group-item" 
                     title="{{ $status }}"
                 >
                     {{ $status }}
@@ -45,7 +45,7 @@
                                 <td>{{ $order->net_total }}</td>
                                 <td>{{ $order->ordered_time }}</td>
                                 <td>
-                                    <a href="/app/order/{{ $order->id }}" title="View Order" >
+                                    <a href="{{ route('customer.order.show',[$order->id]) }}" title="View Order" >
                                         <i class="nav-icon fas fa-eye "></i>
                                     </a>
                                 </td>

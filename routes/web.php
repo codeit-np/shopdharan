@@ -37,13 +37,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Auth::routes();
+
+Route::group([
+    'prefix' => 'admin'
+], function ($router) {
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
 Route::get('/create', CreateAdminController::class)->name('admin.create');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.home');
 Route::resource('cities', CityController::class);
 Route::put('/vendors/{vendor}/updatepassword',[VendorController::class,'updatepassword'])->name('vendors.update.password');
 Route::resource('vendors',VendorController::class);
@@ -57,6 +61,8 @@ Route::post('login',[EmployeeLoginController::class,'process'])->name('admin.log
 Route::delete('logout',[EmployeeLoginController::class,'logout'])->name('admin.logout');
 Route::get('changepassword',[AdminChangePasswordController::class, 'show'])->name('admin.changepassword');
 Route::put('changepassword',[AdminChangePasswordController::class, 'change'])->name('admin.changepassword');
+});
+
 
 Route::group([
     'prefix' => 'supplier'
@@ -75,26 +81,27 @@ Route::group([
     Route::put('changepassword',[SupplierChangePasswordController::class,'change'])->name('supplier.changepassword');
 });
 
-Route::group([
-    'prefix' => 'app'
-], function ($router) {
+// Route::group([
+//     'prefix' => 'app'
+// ], function ($router) {
      
     Route::get('',[UserVendorController::class,'index'])->name('customer.home');
     Route::get('product/{id}',[UserProductController::class,'show'])->name('customer.product');
     Route::get('cart/confirm', [CartController::class,'confirm'])->name('cart.confirm');
     Route::resource('cart',CartController::class);
-    Route::resource('order', UserOrderController::class);
+    Route::resource('order', UserOrderController::class,
+    ["as"=>'customer']);
     Route::post('order/{id}/cancel',[UserOrderController::class,'cancel'])->name('order.cancel');
     Route::get('info', [UserInfoController::class,'index'])->name('customer.info');
     Route::put('info', [UserInfoController::class,'update'])->name('customer.info');
-    Route::delete('clearcart', ClearCart::class)->name('cart.cancel');
-    Route::get('supplier/{id}',[UserVendorController::class,'show'])->name('customer.supplier');
+    Route::delete('clearcart', ClearCart::class)->name('cart.clear');
+    Route::get('vendor/{id}',[UserVendorController::class,'show'])->name('customer.supplier');
     Route::resource('address', UserAddressController::class);
-    Route::get('login', [CustomerLoginController::class,'showlogin'])->name('customerlogin');
-    Route::post('login',[CustomerLoginController::class,'login'])->name('customerlogin');
-    Route::get('register',[CustomerRegisterController::class,'showregister'])->name('customerregister');
-    Route::post('register',[CustomerRegisterController::class,'register'])->name('customerregister');
-    Route::delete('logout',[CustomerLoginController::class,'logout']);
-    Route::get('changepassword',[UserChangePasswordController::class,'show'])->name('customerchangepassword');
-    Route::put('changepassword',[UserChangePasswordController::class,'change'])->name('customerchangepassword');
-});
+    Route::get('login', [CustomerLoginController::class,'showlogin'])->name('customer.login');
+    Route::post('login',[CustomerLoginController::class,'login'])->name('customer.login');
+    Route::get('register',[CustomerRegisterController::class,'showregister'])->name('customer.register');
+    Route::post('register',[CustomerRegisterController::class,'register'])->name('customer.register');
+    Route::delete('logout',[CustomerLoginController::class,'logout'])->name('customer.logout');
+    Route::get('changepassword',[UserChangePasswordController::class,'show'])->name('customer.changepassword');
+    Route::put('changepassword',[UserChangePasswordController::class,'change'])->name('customer.changepassword');
+// });

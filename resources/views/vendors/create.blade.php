@@ -17,7 +17,7 @@
                     Add Vendor
                 </div>
                 <div class="card-body">
-                    <form action="/vendors" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('vendors.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Vendor Name</label>
@@ -112,7 +112,7 @@
                              <td>{{ $vendor->category->category }}</td>
                              <td>{{ $vendor->visible?"Visible":"Not Visible" }}</td>
                              <td>{{ $vendor->open?"Open":"Closed" }}</td>
-                             <td><a href="/vendors/{{ $vendor->id }}/edit" class="btn btn-primary btn-sm">Edit</a></td>
+                             <td><a href="{{ route('vendors.edit',[$vendor->id]) }}" class="btn btn-primary btn-sm">Edit</a></td>
                         </tr>
                      @endforeach
                  </table>

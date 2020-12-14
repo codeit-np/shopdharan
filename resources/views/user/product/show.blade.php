@@ -24,7 +24,7 @@
                         {{ $product->description }}
                     </p>
 
-                    <form method="post" action="/app/cart">
+                    <form method="post" action="{{ route('cart.store') }}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <div class="form-group p-3">
@@ -45,7 +45,7 @@
             <h1 class="my-4">{{ $vendor->name }}</h1>
             <div class="list-group">
                 @foreach ($products as $item)
-                    <a href="/app/product/{{ $item->id }}"
+                    <a href="{{ route('customer.product',[$item->id]) }}"
                         class=" {{ 'list-group-item ' . ($item->id == $product->id ? 'active' : '') }} ">{{ $item->name }}</a>
                 @endforeach
             </div>

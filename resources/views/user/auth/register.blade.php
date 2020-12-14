@@ -13,7 +13,7 @@
                                 {{ session('fail') }}
                             </div>
                         @endif
-                            <form method="POST" action="{{ route('customerregister') }}">
+                            <form method="POST" action="{{ route('customer.register') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
