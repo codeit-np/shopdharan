@@ -8,7 +8,17 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('customer.password.update') }}">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('fail'))
+                        <div class="alert alert-warning" role="alert">
+                            {{ session('fail') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('customer.reset') }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">

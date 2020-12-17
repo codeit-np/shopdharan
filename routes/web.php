@@ -8,8 +8,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClearCart;
 use App\Http\Controllers\CreateAdminController;
+use App\Http\Controllers\CustomerForgotPasswordController;
 use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\CustomerRegisterController;
+use App\Http\Controllers\CustomerResetPasswordController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLoginController;
 use App\Http\Controllers\OrderController;
@@ -117,4 +119,9 @@ Route::group([
     Route::delete('logout',[CustomerLoginController::class,'logout'])->name('customer.logout');
     Route::get('changepassword',[UserChangePasswordController::class,'show'])->name('customer.changepassword');
     Route::put('changepassword',[UserChangePasswordController::class,'change'])->name('customer.changepassword');
-// });
+    Route::get('forgotpassword',[CustomerForgotPasswordController::class,'show'])->name('customer.forgotpassword');
+    Route::post('forgotpassword',[CustomerForgotPasswordController::class,'send'])->name('customer.forgotpassword');
+    Route::get('resetpassword',[CustomerResetPasswordController::class,'show'])->name('customer.reset');
+    Route::post('resetpassword',[CustomerResetPasswordController::class,'send'])->name('customer.reset');
+    
+    // });

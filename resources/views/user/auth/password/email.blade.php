@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('user.index')
 
 @section('content')
 <div class="container">
@@ -8,13 +8,13 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('success'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('success') }}
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('customer.password.email') }}">
+                    <form method="POST" action="{{ route('customer.forgotpassword') }}">
                         @csrf
 
                         <div class="form-group row">
