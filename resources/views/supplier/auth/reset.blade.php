@@ -18,7 +18,7 @@
                             {{ session('fail') }}
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('admin.reset') }}">
+                    <form method="POST" action="{{ route('supplier.reset') }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">

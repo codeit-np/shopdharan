@@ -14,9 +14,11 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeLoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierChangePasswordController;
+use App\Http\Controllers\SupplierForgotPasswordController;
 use App\Http\Controllers\SupplierInfoController;
 use App\Http\Controllers\SupplierLoginController;
 use App\Http\Controllers\SupplierProductController;
+use App\Http\Controllers\SupplierResetPasswordController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Controllers\UserChangePasswordController;
 use App\Http\Controllers\UserInfoController;
@@ -85,6 +87,11 @@ Route::group([
     Route::delete('logout',[SupplierLoginController::class, 'logout'])->name('supplier.logout');
     Route::get('changepassword',[SupplierChangePasswordController::class,'show'])->name('supplier.changepassword');
     Route::put('changepassword',[SupplierChangePasswordController::class,'change'])->name('supplier.changepassword');
+    Route::get('forgotpassword',[SupplierForgotPasswordController::class,'show'])->name('supplier.forgotpassword');
+    Route::post('forgotpassword',[SupplierForgotPasswordController::class,'send'])->name('supplier.forgotpassword');
+    Route::get('resetpassword',[SupplierResetPasswordController::class,'show'])->name('supplier.reset');
+    Route::post('resetpassword',[SupplierResetPasswordController::class,'send'])->name('supplier.reset');
+    
 });
 
 // Route::group([
