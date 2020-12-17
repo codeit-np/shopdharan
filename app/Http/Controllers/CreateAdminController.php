@@ -25,21 +25,12 @@ class CreateAdminController extends Controller
         $employee->email = "admin@shopdharan.com";
         $employee->password = Hash::make('password');
         $employee->is_admin = true;
-        
-        $data = array('name'=>"message");
-   
-        Mail::send(['text'=>'mail'], $data, function($message) {
-           $message->to('theonlysamir@gmail.com', 'Code It')->subject
-              ('Laravel Basic Testing Mail');
-           $message->from('support@shopdharan.com','Shop Dharan');
-        });
-        echo "Basic Email Sent. Check your inbox.";
 
         try{
             $employee->save();
         }catch(Exception $e){
             return redirect()->back();
         }
-        return redirect('login');
+        return redirect('admin.login');
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminChangePasswordController;
+use App\Http\Controllers\AdminForgotPasswordController;
+use App\Http\Controllers\AdminResetPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
@@ -61,6 +63,10 @@ Route::post('login',[EmployeeLoginController::class,'process'])->name('admin.log
 Route::delete('logout',[EmployeeLoginController::class,'logout'])->name('admin.logout');
 Route::get('changepassword',[AdminChangePasswordController::class, 'show'])->name('admin.changepassword');
 Route::put('changepassword',[AdminChangePasswordController::class, 'change'])->name('admin.changepassword');
+Route::get('forgotpassword',[AdminForgotPasswordController::class,'show'])->name('admin.forgotpassword');
+Route::post('forgotpassword',[AdminForgotPasswordController::class,'send'])->name('admin.forgotpassword');
+Route::get('resetpassword',[AdminResetPasswordController::class,'show'])->name('admin.reset');
+Route::post('resetpassword',[AdminResetPasswordController::class,'send'])->name('admin.reset');
 });
 
 
