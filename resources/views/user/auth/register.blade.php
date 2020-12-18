@@ -81,7 +81,7 @@
 
                                     <div class="col-md-6">
                                         <input id="mobile" type='tel'
-                                            class="form-control @error('name') is-invalid @enderror" name="mobile"
+                                            class="form-control @error('mobile') is-invalid @enderror" name="mobile"
                                             value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
 
                                         @error('mobile')

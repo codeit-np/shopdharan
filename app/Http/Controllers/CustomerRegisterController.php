@@ -20,9 +20,9 @@ class CustomerRegisterController extends Controller
     public function register(Request $request){
         $request->validate([
             'name'=>'required',
-            'email'=>'required',
+            'email'=>'required|email|unique:customers',
             'password'=>'required|confirmed|min:6',
-            'mobile'=> 'required|numeric'
+            'mobile'=> 'required|numeric|unique:customers'
         ]);
         $remember = $request->has('remember')?true:false;
         $customer = new Customer();

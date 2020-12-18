@@ -11,7 +11,13 @@
                         @csrf
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input type="text" name="city" class="form-control">
+                            <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
+
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                         <button type="submit" class="btn btn-primary float-right">Save</button>
                     </form>

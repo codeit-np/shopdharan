@@ -61,7 +61,7 @@ class VendorController extends Controller
             'name'=>'required',
             'city_id'=> 'required',
             'category_id'=>'required',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:vendors',
             'password'=>'required',
             'visible'=>'required',
             'open'=>'required'

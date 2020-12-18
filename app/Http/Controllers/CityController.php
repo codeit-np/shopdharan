@@ -41,7 +41,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'city' => 'required'
+            'city' => 'required|unique:cities'
         ]);
         $employee = auth()->user();
         if(!$employee->is_admin){
