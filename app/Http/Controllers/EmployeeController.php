@@ -82,7 +82,7 @@ class EmployeeController extends Controller
         if(!$user_employee->is_admin){
             return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
         }
-        $employee = User::find($id);
+        $employee = User::findOrFail($id);
         if(! $employee){
             return redirect('/employees/create');
         }
@@ -108,7 +108,7 @@ class EmployeeController extends Controller
         if(!$user_employee->is_admin){
             return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
         }
-        $employee = User::find($id);
+        $employee = User::findOrFail($id);
         $employee->name = $request->name;
         $employee->email = $request->email;
         $employee->is_admin = $request->is_admin;
@@ -128,7 +128,7 @@ class EmployeeController extends Controller
         if(!$user_employee->is_admin){
             return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
         }
-        $employee = User::find($id);
+        $employee = User::findOrFail($id);
         $employee->delete();
         return redirect()->route('employees.create')->with('success', 'Employee Deleted Successfully');
     }

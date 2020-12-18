@@ -69,7 +69,7 @@ class OrderController extends Controller
     public function edit($id)
     {   
         $order_statuses = OrderStatus::get();
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         $order->load(['address','items', 'items.product', 'customer']);
         return view('orders.edit',compact('order','order_statuses'));
     }

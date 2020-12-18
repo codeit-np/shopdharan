@@ -90,7 +90,7 @@ class UserOrderController extends Controller
     public function show($id)
     {
         $customer = auth()->user();
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         if($customer->id != $order->customer_id){
             return redirect()->back();
         }
@@ -135,7 +135,7 @@ class UserOrderController extends Controller
     public function cancel($id){
         $order_statuses = OrderStatus::get();
         $customer = auth()->user();
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         if($customer->id != $order->customer_id){
             return redirect()->back();
         }

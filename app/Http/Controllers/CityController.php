@@ -72,7 +72,7 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $city = City::find($id);
+        $city = City::findOrFail($id);
         $cities = City::all();
         return view('city.edit',compact('cities','city'));
     }
@@ -93,7 +93,7 @@ class CityController extends Controller
         if(!$employee->is_admin){
             return redirect()->back()->with('fail',"You're not Allowed To Perform This Task");
         }
-        $city = City::find($id);
+        $city = City::findOrFail($id);
         $city->city = $request->city;
         $city->update();
         return redirect()->back();

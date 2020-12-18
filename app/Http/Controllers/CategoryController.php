@@ -87,7 +87,7 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
 
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->category = $request->name;
         $category->update();
         return redirect()->back();
