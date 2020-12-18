@@ -88,7 +88,7 @@ class SupplierProductController extends Controller
     public function edit($id)
     {   
         $vendor = auth()->user();
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if($product->vendor_id != $vendor->id){
             return redirect()->back()->with('fail', "You're not allowed To View That");
         }
@@ -111,7 +111,7 @@ class SupplierProductController extends Controller
             'discount'=>'required|min:0',
             'available'=>'required',
         ]);
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $vendor = auth()->user();
         if($product->vendor_id!= $vendor->id){
             return redirect()->back()->with('fail', "You're Not Allowed To Do That");
@@ -137,7 +137,7 @@ class SupplierProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $vendor = auth()->user();
         if($product->vendor_id!= $vendor->id){
             return redirect()->back()->with('fail', "You're Not Allowed To Do That");

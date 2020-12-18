@@ -16,12 +16,18 @@ class UserVendorController extends Controller
     public function index(Request $request)
     {   
         $categories = Category::all();
+        $vendors_query = Vendor::query();
+        $vendors_query->where('visible',true);
         if($request->has('category')){
-            $category = Category::find($request->category);
-            $vendors = $category->vendors;
-        }else{
-            $vendors = Vendor::all();
+            $vendors_query->where('category_id',$request->category);
         }
+        $vendors = $vendors_query->get();
+        // if($request->has('category')){
+        //     $category = Category::find($request->category);
+        //     $vendors = $category->vendors;
+        // }else{
+        //     $vendors = Vendor::all();
+        // }
         $vendors->load('city');
         return view('user.supplier.index', compact('categories','vendors'));
     }
@@ -55,7 +61,7 @@ class UserVendorController extends Controller
      */
     public function show($id)
     {
-        $vendor = Vendor::find($id);
+        $vendor = Vendor::findOrFail($id);
         $products = $vendor->products;
         $category = $vendor->category;
         $vendors = $category->vendors;

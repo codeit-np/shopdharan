@@ -46,7 +46,7 @@ class UserProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $vendor = $product->vendor;
         $products= $vendor->products;
         return view('user.product.show',compact('product','vendor','products'));
